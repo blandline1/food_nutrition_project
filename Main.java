@@ -5,6 +5,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Member member = new Member("John Doe", 101); // Example member
         Logger logger = Logger.getInstance();
+        Planner planner = Planner.getInstance();
 
         boolean exit = false;
 
@@ -13,7 +14,7 @@ public class Main {
             System.out.println("1. Go to Logger");
             System.out.println("2. Go to Planner");
             System.out.println("3. Go to Subscriber");
-            System.out.println("2. Exit");
+            System.out.println("-1. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -23,7 +24,15 @@ public class Main {
                 case 1:
                     LoggerMenu.showLoggerMenu(logger, member, scanner);
                     break;
+
                 case 2:
+                    System.out.println("1. Make own plan");
+                    System.out.println("2. Get trainer's plan");
+                    int ch = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+
+                case -1:
                     exit = true;
                     System.out.println("Thank you for using the app. Goodbye!");
                     break;
@@ -35,10 +44,6 @@ public class Main {
         scanner.close();
     }
 
-    public void random(){
-        Trainer train = new Trainer("Trainer", 689);
 
-        //train.showLogs();
 
-    }
 }

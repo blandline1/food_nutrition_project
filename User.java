@@ -7,6 +7,7 @@ public abstract class User {
     protected List<Food> dailyFoodLogs;
     protected List<Workout> dailyWorkoutLogs;
 
+
     public User(String name, int id) {
         this.name = name;
         this.id = id;
