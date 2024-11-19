@@ -11,6 +11,8 @@ public class Main {
         while (!exit) {
             System.out.println("\nWelcome to the Food Nutrition App!");
             System.out.println("1. Go to Logger");
+            System.out.println("2. Go to Planner");
+            System.out.println("3. Go to Subscriber");
             System.out.println("2. Exit");
             System.out.print("Enter your choice: ");
 
@@ -31,5 +33,12 @@ public class Main {
         }
 
         scanner.close();
+    }
+
+    public void random(){
+        Trainer train = new Trainer("Trainer", 689);
+
+        //train.showLogs();
+
     }
 }
