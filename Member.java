@@ -1,7 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Member extends User {
+    protected List<Food> dailyFoodLogs;
+    protected List<Workout> dailyWorkoutLogs;
 
     public Member(String name, int id) {
         super(name, id);
+        this.dailyFoodLogs = new ArrayList<>();
+        this.dailyWorkoutLogs = new ArrayList<>();
     }
 
     @Override
