@@ -1,7 +1,7 @@
 public class Trainer extends User {
 
-    public Trainer(String name, int id) {
-        super(name, id);
+    public Trainer(String name, int id, String password) {
+        super(name, id, password);
     }
 
     @Override
