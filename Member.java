@@ -2,8 +2,8 @@ public class Member extends User {
 
     private boolean premium = false;
 
-    public Member(String name, int id) {
-        super(name, id);
+    public Member(String name, int id, String password) {
+        super(name, id, password);
     }
 
     @Override
