@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Objects;
+
 public class Member extends User {
 
     private boolean premium = false;
@@ -32,5 +35,17 @@ public class Member extends User {
         for (Workout workout : dailyWorkoutLogs) {
             System.out.println(workout);
         }
+    }
+
+    @Override
+    public void getTrainer(List<Trainer> trainers) {}
+
+
+    public void setSubscribed() {
+        premium = true;
+    }
+
+    public boolean checkPremium() {
+        return premium;
     }
 }

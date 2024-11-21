@@ -47,7 +47,10 @@ public class Authenticator {
             char newChar = (char) newCharValue;
             passHash.append(newChar);
         }
-        users.add(new Trainer(name, idCount, passHash.toString()));
+        Trainer trainer = new Trainer(name, idCount, passHash.toString());
+        users.add(trainer);
+        Subscriber subscriber = Subscriber.getInstance();
+        subscriber.addTrainer(trainer);
         idCount++;
         return "Successfully registered with name " + name + " as trainer";
     }
@@ -65,4 +68,11 @@ public class Authenticator {
         return null;
     }
 
+    public List<Trainer> getAllTrainers() {
+        List<Trainer> trainers = new ArrayList<>();
+        for(User user : users) {
+            user.getTrainer(trainers);
+        }
+        return trainers;
+    }
 }
