@@ -65,10 +65,10 @@ public class LoggerMenu {
         int sets = scanner.nextInt();
         System.out.print("Enter reps: ");
         int reps = scanner.nextInt();
-        System.out.print("Enter calories burned: ");
-        int caloriesBurned = scanner.nextInt();
+        System.out.print("Enter minutes of workout: ");
+        int minutes = scanner.nextInt();
 
-        Workout workout = new Workout(name, sets, reps, caloriesBurned);
+        Workout workout = new Workout(name, sets, reps, minutes);
         logger.logWorkout(member, workout);
     }
 }
