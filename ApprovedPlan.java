@@ -4,12 +4,15 @@ public class ApprovedPlan extends AllPlans {
 
     private ArrayList<Food> idealMealPlan = null;
     private ArrayList<Workout> idealWorkoutPlan = null;
+    private Member associatedMember = null;
+    private Trainer associatedTrainer = null;
 
-    public void appendPlan(ArrayList<Food> fd, ArrayList<Workout> wk, Member member){
+    public void appendPlan(ArrayList<Food> fd, ArrayList<Workout> wk, User usr){
 
         idealMealPlan = fd;
         idealWorkoutPlan = wk;
-        append(member, this);
+        //associatedMember = member;
+        append(usr, this);
     }
 
     public ArrayList<Food> getFoodPlan(){
@@ -20,6 +23,15 @@ public class ApprovedPlan extends AllPlans {
     public ArrayList<Workout> getWorkoutPlan(){
         return (ArrayList<Workout>) idealWorkoutPlan.clone();
     }
+
+    public void assignTrainer(Trainer trn) {
+        associatedTrainer = trn;
+
+    }
+
+
+
+
 
 
 

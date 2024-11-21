@@ -17,6 +17,9 @@ public class Member extends User {
     public void setPreimum() {
         premium = true;
     }
+    public boolean getPremium() {
+        return premium;
+    }
 
     public void addFoodLog(Food food) {
         dailyFoodLogs.add(food);

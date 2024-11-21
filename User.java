@@ -7,7 +7,7 @@ public abstract class User {
     protected int id;
     protected List<Food> dailyFoodLogs;
     protected List<Workout> dailyWorkoutLogs;
-
+  
     public User(String name, int id, String password) {
         this.name = name;
         this.password = password;
