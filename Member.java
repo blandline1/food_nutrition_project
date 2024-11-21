@@ -1,9 +1,12 @@
+import java.util.List;
+import java.util.Objects;
+
 public class Member extends User {
 
     private boolean premium = false;
 
-    public Member(String name, int id) {
-        super(name, id);
+    public Member(String name, int id, String password) {
+        super(name, id, password);
     }
 
     @Override
@@ -35,5 +38,17 @@ public class Member extends User {
         for (Workout workout : dailyWorkoutLogs) {
             System.out.println(workout);
         }
+    }
+
+    @Override
+    public void getTrainer(List<Trainer> trainers) {}
+
+
+    public void setSubscribed() {
+        premium = true;
+    }
+
+    public boolean checkPremium() {
+        return premium;
     }
 }
