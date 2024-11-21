@@ -35,4 +35,14 @@ public abstract class User {
         }
         return this.password.contentEquals(passHash);
     }
+
+    @Override
+    public boolean equals(Object user){
+        if(user instanceof User) {
+            return name.equals(((User)user).name);
+        }
+        return false;
+    }
+
+    public abstract void getTrainer(List<Trainer> trainers);
 }

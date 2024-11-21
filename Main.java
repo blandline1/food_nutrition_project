@@ -3,14 +3,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Member member = new Member("John Doe", 101, "12345"); // Example member
         Logger logger = Logger.getInstance();
 
         boolean exit = false;
 
         while (!exit) {
             User loggedUser = null;
-            while (loggedUser == null) {
+            while (loggedUser == null && !exit) {
 
                 System.out.println("\nWelcome to the Food Nutrition App Authenticator!");
                 System.out.println("1. Member sign up");
@@ -21,10 +20,6 @@ public class Main {
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (choice == 4) {
-                    exit = true;
-                    break;
-                }
                 Authenticator authenticator = Authenticator.getInstance();
                 String name;
                 String password;
@@ -46,12 +41,15 @@ public class Main {
                             System.out.print("Invalid credentials");
                         }
                         break;
+                    case 4:
+                        exit = true;
+                        break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
 
             }
-            member = (Member) loggedUser;
+            Member member = (Member) loggedUser;
             if (!exit) {
                 System.out.println("\nWelcome to the Food Nutrition App!");
                 System.out.println("1. Go to Logger");
@@ -70,6 +68,10 @@ public class Main {
                     case 2:
                         exit = true;
                         System.out.println("Thank you for using the app. Goodbye!");
+                        break;
+                    case 3:
+                        Subscriber subscriber = Subscriber.getInstance();
+                        subscriber.showSubscriberMenu(member);
                         break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
