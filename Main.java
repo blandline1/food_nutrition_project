@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +6,7 @@ public class Main {
         Logger logger = Logger.getInstance();
 
         boolean exit = false;
+        boolean run = true;
 
         while (!exit) {
             User loggedUser = null;
