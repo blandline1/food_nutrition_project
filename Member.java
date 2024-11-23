@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Member extends User {
@@ -16,18 +15,13 @@ public class Member extends User {
         return "Member [name=" + name + ", id=" + id + "]";
     }
 
-    public void setPreimum() {
-        premium = true;
-    }
-    public boolean getPremium() {
-        return premium;
-    }
+
 
     public void addFoodLog(Food food) {
         if (dailyFoodLogs.size()==7) {
             if(checkPremium()) {
                 Analysis analysis = Analysis.getInstance();
-                analysis.conductFoodAnalysis();
+                analysis.conductFoodAnalysis(this, dailyFoodLogs);
                 System.out.println("Analysis conducted and saved, clearing previous logs");
             }
             else {
@@ -44,7 +38,7 @@ public class Member extends User {
         if(dailyWorkoutLogs.size()==7) {
             if(checkPremium()) {
                 Analysis analysis = Analysis.getInstance();
-                analysis.conductWorkoutAnalysis();
+                analysis.conductWorkoutAnalysis(this, dailyWorkoutLogs);
                 System.out.println("Analysis conducted and saved, clearing previous logs");
             }
             else {
@@ -102,4 +96,6 @@ public class Member extends User {
     public boolean checkPremium() {
         return premium;
     }
+
+
 }

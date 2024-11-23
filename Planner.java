@@ -73,7 +73,7 @@ public class Planner {
         }
         
         
-        if (mb.getPremium()) {
+        if (mb.checkPremium()) {
             ApprovedPlan ap = new ApprovedPlan();
             ap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
             ArrayList<AllPlans> pln = allPlans.get(mb);

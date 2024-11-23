@@ -57,7 +57,7 @@ public class Main {
             try{
                 while (!exit) {
 
-                    System.out.println("1. Go to Logger");
+                    System.out.println("\n1. Go to Logger");
                     System.out.println("2. Go to Planner");
                     System.out.println("3. Go to Subscriber");
                     System.out.println("4. Go to Analysis");
@@ -96,7 +96,12 @@ public class Main {
                             subscriber.showSubscriberMenu(member);
                             break;
                         case 4:
-                            System.out.println("Feature not yet implemented, go away.");
+                            if(!member.checkPremium()) {
+                                throw new ExNotSubscribed();
+                            }
+                            else {
+
+                            }
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
