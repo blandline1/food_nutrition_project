@@ -2,7 +2,8 @@ import java.util.*;
 
 public class Subscriber {
     private static final Subscriber instance = new Subscriber();
-    HashMap<Trainer, List<Member>> subscribeTrainers;
+    private HashMap<Trainer, List<Member>> subscribeTrainers;
+
 
     private Subscriber(){
         subscribeTrainers = new HashMap<>();
@@ -22,7 +23,7 @@ public class Subscriber {
                 System.out.println("1. Subscribe trainer");
             }
             System.out.println("2. Show trainer stats");
-            System.out.println("2. Back");
+            System.out.println("-1. Back");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
@@ -37,7 +38,7 @@ public class Subscriber {
                 case 2:
                     showSubscribedStats();
                     break;
-                case 3:
+                case -1:
                     return;
                 default:
                     System.out.println("Invalid choice");
@@ -58,12 +59,18 @@ public class Subscriber {
 
         System.out.print("Enter the number (-1 to back): ");
         int trainerID = scanner.nextInt();
-        if(trainerID > 0 && trainerID <= allTrainers.size()) {
-            Trainer trainer = allTrainers.get(trainerID-1);
-            subscribeTrainers.get(trainer).add(loggedMember);
-            loggedMember.setSubscribed();
-            System.out.println(loggedMember + " subscribed to " + trainer + " Successfully!");
+        if (allTrainers.isEmpty()) {
+            System.out.println("No trainers available");
         }
+        else {
+            if(trainerID > 0 && trainerID <= allTrainers.size()) {
+                Trainer trainer = allTrainers.get(trainerID-1);
+                subscribeTrainers.get(trainer).add(loggedMember);
+                loggedMember.setSubscribed();
+                System.out.println(loggedMember + " subscribed to " + trainer + " Successfully!");
+            }
+        }
+
     }
 
     private void showTrainerList(List<Trainer> allTrainers) {
@@ -78,7 +85,46 @@ public class Subscriber {
         }
     }
 
+
     public void addTrainer(Trainer trainer) {
         subscribeTrainers.put(trainer, new ArrayList<>());
     }
+
+    public boolean isSubscribed(Member mb) {
+        List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
+        for (Trainer trainer : trainerlist) {
+            List<Member> memberList = subscribeTrainers.get(trainer);
+            if (memberList.contains(mb)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public AllPlans choseTrainerPlan(Member mb) {
+        try{
+            List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
+            Trainer trainer = null;
+            for (Trainer trn : trainerlist) {
+                List<Member> memberList = subscribeTrainers.get(trn);
+                if (memberList.contains(mb)) {
+                    trainer = trn;
+                    break;
+                }
+            }
+            Planner planner = Planner.getInstance();
+            AllPlans plan = planner.getPlan(trainer);
+            if (plan == null) {
+                throw new ExNoTrainerPlan();
+            }
+            return plan;
+        }
+        catch (ExNoTrainerPlan e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+
+    }
 }
+
+

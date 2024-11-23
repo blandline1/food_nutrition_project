@@ -3,16 +3,16 @@ import java.util.*;
 public class ApprovedPlan extends AllPlans {
 
     private ArrayList<Food> idealMealPlan = null;
-    private ArrayList<Workout> idealWorkoutPlan = null;
+    private ArrayList<ArrayList<Workout>> idealWorkoutPlan = null;
     private Member associatedMember = null;
     private Trainer associatedTrainer = null;
 
-    public void appendPlan(ArrayList<Food> fd, ArrayList<Workout> wk, User usr){
+    public void updatePlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr){
 
         idealMealPlan = fd;
         idealWorkoutPlan = wk;
         //associatedMember = member;
-        append(usr, this);
+
     }
 
     public ArrayList<Food> getFoodPlan(){
@@ -20,8 +20,8 @@ public class ApprovedPlan extends AllPlans {
     }
 
 
-    public ArrayList<Workout> getWorkoutPlan(){
-        return (ArrayList<Workout>) idealWorkoutPlan.clone();
+    public ArrayList<ArrayList<Workout>> getWorkoutPlan(){
+        return (ArrayList<ArrayList<Workout>>) idealWorkoutPlan.clone();
     }
 
     public void assignTrainer(Trainer trn) {

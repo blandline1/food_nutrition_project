@@ -15,4 +15,19 @@ public class Workout {
     public String toString() {
         return "Workout [name=" + name + ", sets=" + sets + ", reps=" + reps + ", minutes=" + minutes + "]";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Workout other = (Workout) obj;
+        return this.name.equals(other.name) &&
+                this.sets == other.sets &&
+                this.reps == other.reps &&
+                this.minutes == other.minutes;
+    }
 }

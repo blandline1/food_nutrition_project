@@ -1,11 +1,14 @@
-
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Logger logger = Logger.getInstance();
+        Planner planner = Planner.getInstance();
+        Subscriber sb = Subscriber.getInstance();
 
         boolean exit = false;
+
 
         while (!exit) {
             User loggedUser = null;
@@ -49,36 +52,73 @@ public class Main {
                 }
 
             }
+            System.out.println("\nWelcome to the Food Nutrition App!");
             Member member = (Member) loggedUser;
-            if (!exit) {
-                System.out.println("\nWelcome to the Food Nutrition App!");
-                System.out.println("1. Go to Logger");
-                System.out.println("2. Go to Planner");
-                System.out.println("3. Go to Subscriber");
-                System.out.println("2. Exit");
-                System.out.print("Enter your choice: ");
+            try{
+                while (!exit) {
 
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
+                    System.out.println("\n1. Go to Logger");
+                    System.out.println("2. Go to Planner");
+                    System.out.println("3. Go to Subscriber");
+                    System.out.println("4. Go to Analysis");
+                    System.out.println("-1. Exit");
+                    System.out.print("Enter your choice: ");
 
-                switch (choice) {
-                    case 1:
-                        LoggerMenu.showLoggerMenu(logger, member, scanner);
-                        break;
-                    case 2:
-                        exit = true;
-                        System.out.println("Thank you for using the app. Goodbye!");
-                        break;
-                    case 3:
-                        Subscriber subscriber = Subscriber.getInstance();
-                        subscriber.showSubscriberMenu(member);
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
+                    int choice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    switch (choice) {
+                        case -1:
+                            exit = true;
+                            System.out.println("Thank you for using Food Nutrition App!");
+                            break;
+                        case 1:
+                            LoggerMenu.showLoggerMenu(logger, member, scanner);
+                            break;
+                        case 2:
+                            exit = true;
+                            System.out.println("1. Make a plan.");
+                            System.out.println("2. Pick trainer plan.");
+                            int plan_opt = scanner.nextInt();
+                            if (plan_opt == 1) {
+                                planner.makePlan(member);
+                            }
+                            else if (plan_opt == 2) {
+                                if(!sb.isSubscribed(member)) {
+                                    throw new ExNotSubscribed();
+                                }
+                                AllPlans plan = sb.choseTrainerPlan(member);
+                                planner.displayPlan(member);
+                            }
+                            break;
+                        case 3:
+                            Subscriber subscriber = Subscriber.getInstance();
+                            subscriber.showSubscriberMenu(member);
+                            break;
+                        case 4:
+                            if(!member.checkPremium()) {
+                                throw new ExNotSubscribed();
+                            }
+                            else {
+
+                            }
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                    }
                 }
+
+            }
+            catch (ExNotSubscribed e) {
+                System.out.println(e.getMessage());
+
+            }
+
+            finally {
+                scanner.close();
             }
         }
 
-        scanner.close();
+
     }
 }

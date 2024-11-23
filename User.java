@@ -5,8 +5,8 @@ public abstract class User {
     protected String name;
     protected String password;
     protected int id;
-    protected List<Food> dailyFoodLogs;
-    protected List<Workout> dailyWorkoutLogs;
+    protected ArrayList<Food> dailyFoodLogs;
+    protected ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
   
     public User(String name, int id, String password) {
         this.name = name;
@@ -45,4 +45,5 @@ public abstract class User {
     }
 
     public abstract void getTrainer(List<Trainer> trainers);
+
 }
