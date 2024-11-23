@@ -1,25 +1,29 @@
-import java.util.ArrayList;
+import java.lang.reflect.Array;
+import java.util.*;
 
-public class NonApprovedPlan extends AllPlans{
+public class NonApprovedPlan extends AllPlans {
 
     private ArrayList<Food> idealMealPlan = null;
-    private ArrayList<Workout> idealWorkoutPlan = null;
+    private ArrayList<ArrayList<Workout>> idealWorkoutPlan = null;
 
-    public void appendPlan(ArrayList<Food> fd, ArrayList<Workout> wk, Member member){
+
+    public void appendPlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr) {
 
         idealMealPlan = fd;
         idealWorkoutPlan = wk;
-        append(member, this);
+        //associatedMember = member;
+        append(usr, this);
     }
 
-    public ArrayList<Food> getFoodPlan(){
+    public ArrayList<Food> getFoodPlan() {
         return (ArrayList<Food>) idealMealPlan.clone();
     }
 
 
-    public ArrayList<Workout> getWorkoutPlan(){
-        return (ArrayList<Workout>) idealWorkoutPlan.clone();
+    public ArrayList<ArrayList<Workout>> getWorkoutPlan() {
+        return (ArrayList<ArrayList<Workout>>) idealWorkoutPlan.clone();
     }
 
-
 }
+
+

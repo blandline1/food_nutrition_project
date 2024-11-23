@@ -6,7 +6,7 @@ public class Main {
         Logger logger = Logger.getInstance();
 
         boolean exit = false;
-        boolean run = true;
+
 
         while (!exit) {
             User loggedUser = null;
