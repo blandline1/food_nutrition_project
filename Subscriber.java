@@ -22,7 +22,7 @@ public class Subscriber {
                 System.out.println("1. Subscribe trainer");
             }
             System.out.println("2. Show trainer stats");
-            System.out.println("2. Back");
+            System.out.println("3. Back");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
