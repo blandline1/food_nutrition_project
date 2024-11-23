@@ -1,16 +1,14 @@
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.*;
 
 public abstract class AllPlans implements Cloneable{
 
-    private static HashMap<User, ArrayList<AllPlans>> MemberPlans = new HashMap<>();
 
-    protected void append(User usr, AllPlans plan){
+    public abstract void updatePlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr);
+    public abstract ArrayList<Food> getFoodPlan();
+    public abstract ArrayList<ArrayList<Workout>> getWorkoutPlan();
 
-        ArrayList<AllPlans> temp = MemberPlans.get(usr);
-        temp.add(plan);
-        MemberPlans.put(usr, temp);
-    }
 
 
 

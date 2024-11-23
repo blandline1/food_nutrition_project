@@ -5,6 +5,11 @@ public class Planner {
     public static Planner getInstance(){
         return instance;
     }
+    private HashMap<User, ArrayList<AllPlans>> allPlans;
+
+    private Planner(){
+        allPlans = new HashMap<>();
+    }
 
     public void makePlan(Member mb) {
 
@@ -66,11 +71,17 @@ public class Planner {
         
         if (mb.getPremium()) {
             ApprovedPlan ap = new ApprovedPlan();
-            ap.appendPlan(ret_fd_obj, ret_wk_obj, mb);
+            ap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
+            ArrayList<AllPlans> pln = allPlans.get(mb);
+            pln.add(ap);
+            allPlans.put(mb, pln);
         }
         else {
             NonApprovedPlan nap = new NonApprovedPlan();
-            nap.appendPlan(ret_fd_obj, ret_wk_obj, mb);
+            nap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
+            ArrayList<AllPlans> pln = allPlans.get(mb);
+            pln.add(nap);
+            allPlans.put(mb, pln);
         }
 
     }
@@ -134,8 +145,40 @@ public class Planner {
 
 
         ApprovedPlan ap = new ApprovedPlan();
-        ap.appendPlan(ret_fd_obj, ret_wk_obj, tr);
+        ap.updatePlan(ret_fd_obj, ret_wk_obj, tr);
+        ArrayList<AllPlans> pln = allPlans.get(tr);
+        pln.add(ap);
+        allPlans.put(tr, pln);
 
+    }
+
+    public AllPlans getPlan(User usr) {
+        if (allPlans.containsKey(usr)) {
+            return allPlans.get(usr).getLast();
+        }
+        return null;
+
+    }
+
+    public void displayPlan(User usr) {
+        AllPlans pln = getPlan(usr);
+        if (pln != null) {
+            ArrayList<Food> fd = pln.getFoodPlan();
+            ArrayList<ArrayList<Workout>> wk = pln.getWorkoutPlan();
+            int counter = 0;
+            for (Food fd_el : fd) {
+                System.out.printf("Day %d: %s\n", counter, fd);
+                counter++;
+            }
+            counter = 0;
+            for (ArrayList<Workout> wk_el : wk) {
+                System.out.printf("Day %d:\n", counter);
+                for (Workout wk_el_el : wk_el) {
+                    System.out.println(wk_el_el);
+                }
+                counter++;
+            }
+        }
     }
 
 }

@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class NonApprovedPlan extends AllPlans {
@@ -7,12 +6,11 @@ public class NonApprovedPlan extends AllPlans {
     private ArrayList<ArrayList<Workout>> idealWorkoutPlan = null;
 
 
-    public void appendPlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr) {
+    public void updatePlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr) {
 
         idealMealPlan = fd;
         idealWorkoutPlan = wk;
         //associatedMember = member;
-        append(usr, this);
     }
 
     public ArrayList<Food> getFoodPlan() {
