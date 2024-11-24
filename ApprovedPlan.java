@@ -2,8 +2,8 @@ import java.util.*;
 
 public class ApprovedPlan extends AllPlans {
 
-    private ArrayList<Food> idealMealPlan = null;
-    private ArrayList<ArrayList<Workout>> idealWorkoutPlan = null;
+    private ArrayList<Food> idealMealPlan = new ArrayList<>();
+    private ArrayList<ArrayList<Workout>> idealWorkoutPlan = new ArrayList<>();
     private Member associatedMember = null;
     private Trainer associatedTrainer = null;
 

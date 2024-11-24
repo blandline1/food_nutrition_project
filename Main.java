@@ -1,8 +1,9 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("1.txt"));
         Logger logger = Logger.getInstance();
         Planner planner = Planner.getInstance();
         Subscriber sb = Subscriber.getInstance();
@@ -90,7 +91,7 @@ public class Main {
                             System.out.println("2. Pick trainer plan.");
                             int plan_opt = scanner.nextInt();
                             if (plan_opt == 1) {
-                                planner.makePlan(member);
+                                planner.makePlan(member, scanner);
                             }
                             else if (plan_opt == 2) {
                                 if(!sb.isSubscribed(member)) {

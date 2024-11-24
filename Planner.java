@@ -11,9 +11,13 @@ public class Planner {
         allPlans = new HashMap<>();
     }
 
-    public void makePlan(Member mb) {
+    public void memberCreation(Member member){
+        allPlans.put(member, new ArrayList<>());
+    }
 
-        Scanner s = new Scanner(System.in);
+    public void makePlan(Member mb, Scanner s) {
+
+
         
         // Making food plan
         
@@ -60,6 +64,7 @@ public class Planner {
             ArrayList<Workout> wk_list = new ArrayList<>();
             for (int j = 0; j < num_works; j++) {
                 System.out.println("Please enter workout: ");
+                s.nextLine();
                 wk_name = s.nextLine();
                 System.out.println("Please enter number of sets: ");
                 sets = s.nextInt();
@@ -90,8 +95,8 @@ public class Planner {
 
     }
 
-    public void makePlan(Trainer tr) {
-        Scanner s = new Scanner(System.in);
+    public void makePlan(Trainer tr, Scanner s) {
+
 
         // Making food plan
 
