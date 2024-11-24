@@ -29,8 +29,11 @@ public class Authenticator {
             char newChar = (char) newCharValue;
             passHash.append(newChar);
         }
-        users.add(new Member(name, idCount, passHash.toString()));
+        Member member = new Member(name, idCount, passHash.toString());
+        users.add(member);
         idCount++;
+        Planner planner = Planner.getInstance();
+        planner.memberCreation(member);
         return "Successfully registered with name " + name + " as member";
     }
 
