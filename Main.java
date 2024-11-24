@@ -22,14 +22,19 @@ public class Main {
 
                 int choice = scanner.nextInt();
                 scanner.nextLine();
-
                 Authenticator authenticator = Authenticator.getInstance();
-                String name;
-                String password;
-                System.out.print("Please enter your username: ");
-                name = scanner.nextLine();
-                System.out.print("Please enter your password: ");
-                password = scanner.nextLine();
+                String name = "";
+                String password = "";
+
+
+                if(choice != 4) {
+
+                    System.out.print("Please enter your username: ");
+                    name = scanner.nextLine();
+                    System.out.print("Please enter your password: ");
+                    password = scanner.nextLine();
+                }
+
 
                 switch (choice) {
                     case 1:
@@ -46,15 +51,19 @@ public class Main {
                         break;
                     case 4:
                         exit = true;
+                        System.out.println("Fuck off!");
                         break;
                     default:
                         System.out.println("Invalid choice. Please try again.");
                 }
 
             }
-            System.out.println("\nWelcome to the Food Nutrition App!");
             Member member = (Member) loggedUser;
+            if (!exit) {
+                System.out.println("\nWelcome to the Food Nutrition App!");
+            }
             try{
+
                 while (!exit) {
 
                     System.out.println("\n1. Go to Logger");
@@ -100,7 +109,7 @@ public class Main {
                                 throw new ExNotSubscribed();
                             }
                             else {
-
+                                member.conductAnalysis();
                             }
                             break;
                         default:

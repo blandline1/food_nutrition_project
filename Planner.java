@@ -5,7 +5,7 @@ public class Planner {
     public static Planner getInstance(){
         return instance;
     }
-    private HashMap<User, ArrayList<AllPlans>> allPlans;
+    private HashMap<User, ArrayList<AllPlans>> allPlans = new HashMap<>();
 
     private Planner(){
         allPlans = new HashMap<>();
@@ -60,7 +60,7 @@ public class Planner {
             ArrayList<Workout> wk_list = new ArrayList<>();
             for (int j = 0; j < num_works; j++) {
                 System.out.println("Please enter workout: ");
-                wk_name = s.next();
+                wk_name = s.nextLine();
                 System.out.println("Please enter number of sets: ");
                 sets = s.nextInt();
                 System.out.println("Please enter number of reps: ");
@@ -134,7 +134,7 @@ public class Planner {
             ArrayList<Workout> wk_list = new ArrayList<>();
             for (int j = 0; j < num_works; j++) {
                 System.out.println("Please enter workout: ");
-                wk_name = s.next();
+                wk_name = s.nextLine();
                 System.out.println("Please enter number of sets: ");
                 sets = s.nextInt();
                 System.out.println("Please enter number of reps: ");
