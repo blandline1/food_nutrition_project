@@ -1,26 +1,16 @@
 import java.util.*;
 
-public class ApprovedPlan extends AllPlans {
+public class ApprovedPlan implements PlanType {
 
-    private ArrayList<Food> idealMealPlan = null;
-    private ArrayList<Workout> idealWorkoutPlan = null;
+    private static ApprovedPlan approvedPlan = new ApprovedPlan();
 
-    public void appendPlan(ArrayList<Food> fd, ArrayList<Workout> wk, Member member){
+    private ApprovedPlan() {}
 
-        idealMealPlan = fd;
-        idealWorkoutPlan = wk;
-        append(member, this);
+    public static ApprovedPlan getInstance() {return approvedPlan;}
+
+    @Override
+    public void printPlanType() {
+        System.out.println("--- APPROVE PLAN ---");
     }
-
-    public ArrayList<Food> getFoodPlan(){
-        return (ArrayList<Food>) idealMealPlan.clone();
-    }
-
-
-    public ArrayList<Workout> getWorkoutPlan(){
-        return (ArrayList<Workout>) idealWorkoutPlan.clone();
-    }
-
-
 
 }

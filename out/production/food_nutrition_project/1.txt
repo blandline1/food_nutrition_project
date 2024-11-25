@@ -1,0 +1,157 @@
+1
+Kim
+123
+2
+Lee
+123
+2
+John
+123
+3
+Kim
+123
+1
+1
+2222
+1000
+35
+200
+Banana, Apple, Karahi, Payaa, Makai
+2
+2
+Lat pulldowns
+3
+10
+15
+4
+2
+1
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+1800
+1000
+40
+100
+4
+Banana
+Payaa
+Karahi
+Payaa
+4
+2
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+Bicep Curls
+3
+9
+15
+Lat pulldowns
+3
+10
+15
+
+-1

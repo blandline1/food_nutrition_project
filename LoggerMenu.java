@@ -3,8 +3,10 @@ import java.util.Scanner;
 
 public class LoggerMenu {
 
-    public static void showLoggerMenu(Logger logger, Member member, Scanner scanner) {
+    public static void showLoggerMenu(Scanner scanner) {
         boolean exitLogger = false;
+        Logger logger = Logger.getInstance();
+        Member member = (Member) Authenticator.getInstance().getLoggedUser();
 
         while (!exitLogger) {
             System.out.println("\nLogger Menu:");

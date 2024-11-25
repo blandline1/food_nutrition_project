@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class User {
     protected String name;
     protected String password;
     protected int id;
-    protected List<Food> dailyFoodLogs;
-    protected List<Workout> dailyWorkoutLogs;
-
+    protected ArrayList<Food> dailyFoodLogs;
+    protected ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
+  
     public User(String name, int id, String password) {
         this.name = name;
         this.password = password;
@@ -35,4 +36,24 @@ public abstract class User {
         }
         return this.password.contentEquals(passHash);
     }
+
+    @Override
+    public boolean equals(Object user){
+        if(user instanceof User) {
+            return name.equals(((User)user).name);
+        }
+        return false;
+    }
+
+    public abstract void getTrainer(List<Trainer> trainers);
+
+    public abstract void showOptions();
+
+    public abstract void runOpt4() throws ExNotSubscribed;
+
+    public abstract void runOpt2(Scanner scanner) throws ExNotSubscribed;
+
+    public abstract void runOpt1(Scanner scanner);
+
+    public abstract void runOpt3();
 }
