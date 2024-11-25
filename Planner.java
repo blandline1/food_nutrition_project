@@ -2,13 +2,15 @@ import java.util.*;
 
 public class Planner {
     private static final Planner instance = new Planner();
-    public static Planner getInstance(){
-        return instance;
-    }
-    private HashMap<User, ArrayList<AllPlans>> allPlans = new HashMap<>();
+
+    private final HashMap<User, ArrayList<AllPlans>> allPlans;
 
     private Planner(){
         allPlans = new HashMap<>();
+    }
+
+    public static Planner getInstance(){
+        return instance;
     }
 
     public void memberCreation(Member member){
@@ -24,9 +26,9 @@ public class Planner {
         for (int i = 0; i < 7; i++) {
 
             System.out.printf("Day %d:\n", i+1);
-            int calories, carbs, proteins, fats, num_foods = 0;
+            int calories, carbs, proteins, fats, num_foods;
             List<String> foodList = new ArrayList<>();
-            double waterIntake = 0.0;
+            double waterIntake;
 
             // Making food object
             System.out.println("Please enter target calories: ");
@@ -73,22 +75,12 @@ public class Planner {
             }
             ret_wk_obj.add(wk_list);
         }
-        
-        
-        if (mb.checkPremium()) {
-            ApprovedPlan ap = new ApprovedPlan();
-            ap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
-            ArrayList<AllPlans> pln = allPlans.get(mb);
-            pln.add(ap);
-            allPlans.put(mb, pln);
-        }
-        else {
-            NonApprovedPlan nap = new NonApprovedPlan();
+
+            AllPlans nap = new AllPlans();
             nap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
             ArrayList<AllPlans> pln = allPlans.get(mb);
             pln.add(nap);
             allPlans.put(mb, pln);
-        }
 
     }
 
@@ -150,7 +142,7 @@ public class Planner {
 
 
 
-        ApprovedPlan ap = new ApprovedPlan();
+        AllPlans ap = new AllPlans();
         ap.updatePlan(ret_fd_obj, ret_wk_obj, tr);
         ArrayList<AllPlans> pln = allPlans.get(tr);
         pln.add(ap);
@@ -160,7 +152,10 @@ public class Planner {
 
     public AllPlans getPlan(User usr) {
         if (allPlans.containsKey(usr)) {
-            return allPlans.get(usr).getLast();
+            ArrayList<AllPlans> pln = allPlans.get(usr);
+            if(!pln.isEmpty()) {
+                return allPlans.get(usr).getLast();
+            }
         }
         return null;
 
@@ -187,4 +182,13 @@ public class Planner {
         }
     }
 
+    public void showPlan(Member member, Scanner scanner) {
+        AllPlans pln = getPlan(member);
+        if (pln != null) {
+            pln.printPlan();
+            pln.approve((Trainer) Authenticator.getInstance().getLoggedUser(), scanner);
+        }else{
+            System.out.println("User does not have any plan yet!!");
+        }
+    }
 }

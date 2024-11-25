@@ -4,7 +4,7 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File("1.txt"));
-        runningProgram(scanner);
+        //runningProgram(scanner);
         scanner.close();
         scanner = new Scanner(System.in);
         runningProgram(scanner);
@@ -68,7 +68,7 @@ public class Main {
                     System.out.println("\nWelcome to the Food Nutrition App!");
                 }
 
-                while (!exit) {
+                while (!exit && loggedUser != null) {
 
                     loggedUser.showOptions();
 
@@ -77,7 +77,7 @@ public class Main {
 
                     switch (choice) {
                         case -1:
-                            exit = true;
+                            loggedUser = null;
                             System.out.println("Thank you for using Food Nutrition App!");
                             break;
                         case 1:

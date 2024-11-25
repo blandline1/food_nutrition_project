@@ -54,8 +54,7 @@ public class Subscriber {
     }
 
     public void subscribeToTrainers(Member loggedMember, Scanner scanner){
-        Authenticator authenticator = Authenticator.getInstance();
-        List<Trainer> allTrainers = authenticator.getAllTrainers();
+        List<Trainer> allTrainers = Authenticator.getInstance().getAllTrainers();
         showTrainerList(allTrainers);
 
         System.out.print("Enter the number (-1 to back): ");
@@ -115,6 +114,25 @@ public class Subscriber {
         }
         return null;
 
+    }
+
+    public List<Member> showMyMembers() {
+        Trainer trainer = (Trainer) Authenticator.getInstance().getLoggedUser();
+        int count = 1;
+        System.out.println("--- SUBSCRIBED MEMBERS ---");
+        List<Member> memberList = subscribeTrainers.get(trainer);
+        for(Member member : memberList) {
+            System.out.println(count + ": " + member.getName());
+            count++;
+        }
+        return memberList;
+    }
+
+    public Member showMyMembersAndChoose(Scanner scanner) {
+        List<Member> members = showMyMembers();
+        System.out.println("Choose member: ");
+        int choice = scanner.nextInt();
+        return members.get(choice-1);
     }
 }
 
