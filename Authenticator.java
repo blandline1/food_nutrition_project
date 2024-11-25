@@ -3,14 +3,19 @@ import java.util.List;
 
 public class Authenticator {
 
-    private static Authenticator instance = new Authenticator();
-    private List<User>  users;
+    private static final Authenticator instance = new Authenticator();
+    private User loggedUser;
+    private final List<User> users;
     private int idCount;
+
 
     private Authenticator() {
         users = new ArrayList<>();
         idCount = 0;
+        loggedUser = null;
     }
+
+    public User getLoggedUser() {return loggedUser;}
 
     public static Authenticator getInstance() {
         return instance;
@@ -59,14 +64,15 @@ public class Authenticator {
     }
 
     public User Login(String username, String password) {
-        User loogedUser = null;
+        User loggedUser = null;
         for(User user : users) {
             if(user.getName().equals(username)){
-                loogedUser = user;
+                loggedUser = user;
             }
         }
-        if(loogedUser != null && loogedUser.checkPass(password)){
-            return loogedUser;
+        if(loggedUser != null && loggedUser.checkPass(password)){
+            this.loggedUser = loggedUser;
+            return loggedUser;
         }
         return null;
     }
