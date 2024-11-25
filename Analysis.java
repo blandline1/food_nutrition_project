@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Analysis {
@@ -12,37 +13,44 @@ public class Analysis {
         return instance;
     }
 
-    public void conductWorkoutAnalysis(Member mem, ArrayList<ArrayList<Workout>> wk) {
-        Planner planner = Planner.getInstance();
-        AllPlans ap = planner.getPlan(mem);
-        ArrayList<ArrayList<Workout>> idealPlan = ap.getWorkoutPlan();
-        for (int i = 0; i < idealPlan.size(); i++) {
-            int times_hit = 0;
-            for (int j =0; j< idealPlan.get(i).size(); j++) {
+    public double func_Q(int xi, int xa) {
+        return ((double) (xi - Math.abs(xa - xi)) /xi) * 100;
+    }
 
-                if(idealPlan.get(i).get(j).equals(wk.get(i).get(j))) {
-                    times_hit ++;
-                }
+    public double food_biased_weight(int cal, int fats, int prot, int carbs, int hyd, int adher) {
+        return 0.3*cal + 0.1*fats + 0.15*prot + 0.15*carbs + 0.2*hyd + 0.1*adher;
+    }
+
+    public double workout_biased_weight(int sets, int reps, int weights) {
+        return 0.3*sets + 0.3*reps + 0.4*weights;
+    }
+
+    public double adherence_calculator(ArrayList<String> expected, ArrayList<String> actual) {
+        int times_expected = 0;
+        for (String s : actual) {
+            if (expected.contains(s)) {
+                times_expected++;
             }
-            System.out.printf("On Day %d, workout times hit: %d\n", i, times_hit);
+        }
+        return ((double) times_expected /expected.size()) * 100;
+    }
+
+    public double hyd_score(int x, int cap) {
+        if(x>=cap) {
+            return 100;
 
         }
-    }
-    public void conductFoodAnalysis(Member mem, ArrayList<Food> fd) {
-        Planner planner = Planner.getInstance();
-        AllPlans ap = planner.getPlan(mem);
-        ArrayList<Food> idealPlan = ap.getFoodPlan();
-        int times_hit = 0;
-        for (int i = 0; i < idealPlan.size(); i++) {
-
-            if (idealPlan.get(i).equals(fd.get(i))) {
-                times_hit ++;
-            }
-
+        else {
+            return (double) x/cap * 100;
         }
-        System.out.printf("Total weekly food hit: %d", times_hit);
+    }
+
+    public void conductFoodAnalysis(Member mb) {
 
     }
+
+
+
 
 
 }
