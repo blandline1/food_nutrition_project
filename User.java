@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class User {
     protected String name;
@@ -46,4 +47,13 @@ public abstract class User {
 
     public abstract void getTrainer(List<Trainer> trainers);
 
+    public abstract void showOptions();
+
+    public abstract void runOpt4() throws ExNotSubscribed;
+
+    public abstract void runOpt2(Scanner scanner) throws ExNotSubscribed;
+
+    public abstract void runOpt1(Scanner scanner);
+
+    public abstract void runOpt3();
 }

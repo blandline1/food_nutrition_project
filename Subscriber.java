@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Subscriber {
     private static final Subscriber instance = new Subscriber();
-    private HashMap<Trainer, List<Member>> subscribeTrainers;
+    private final HashMap<Trainer, List<Member>> subscribeTrainers;
 
 
     private Subscriber(){
@@ -13,8 +13,9 @@ public class Subscriber {
         return instance;
     }
 
-    public void showSubscriberMenu(Member loggedMember){
+    public void showSubscriberMenu(){
         while(true) {
+            Member loggedMember = (Member) Authenticator.getInstance().getLoggedUser();
             Scanner scanner = new Scanner(System.in);
             System.out.println("\nPlease choose your wish");
             if (loggedMember.checkPremium()) {
@@ -90,19 +91,9 @@ public class Subscriber {
         subscribeTrainers.put(trainer, new ArrayList<>());
     }
 
-    public boolean isSubscribed(Member mb) {
-        List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
-        for (Trainer trainer : trainerlist) {
-            List<Member> memberList = subscribeTrainers.get(trainer);
-            if (memberList.contains(mb)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public AllPlans choseTrainerPlan(Member mb) {
+    public AllPlans choseTrainerPlan() {
         try{
+            Member mb = (Member) Authenticator.getInstance().getLoggedUser();
             List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
             Trainer trainer = null;
             for (Trainer trn : trainerlist) {

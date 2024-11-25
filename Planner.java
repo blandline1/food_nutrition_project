@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Planner {
-    private static Planner instance = new Planner();
+    private static final Planner instance = new Planner();
     public static Planner getInstance(){
         return instance;
     }
@@ -15,12 +15,11 @@ public class Planner {
         allPlans.put(member, new ArrayList<>());
     }
 
-    public void makePlan(Member mb, Scanner s) {
+    public void makePlan(Scanner s) {
 
+        Member mb = (Member) Authenticator.getInstance().getLoggedUser();
 
-        
         // Making food plan
-        
         ArrayList<Food> ret_fd_obj = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
 
@@ -29,8 +28,7 @@ public class Planner {
             List<String> foodList = new ArrayList<>();
             double waterIntake = 0.0;
 
-            // Making food object 
-
+            // Making food object
             System.out.println("Please enter target calories: ");
             calories = s.nextInt();
             System.out.println("Please enter target carbs: ");
@@ -52,7 +50,6 @@ public class Planner {
         }
         
         // Making workout plan
-        
         System.out.println("Please enter number of workouts in each day: ");
         int num_works = s.nextInt();
         ArrayList<ArrayList<Workout>> ret_wk_obj = new ArrayList<>();
@@ -95,7 +92,7 @@ public class Planner {
 
     }
 
-    public void makePlan(Trainer tr, Scanner s) {
+    public void makePlanTrainer(Trainer tr, Scanner s) {
 
 
         // Making food plan

@@ -26,9 +26,11 @@ public class Member extends User {
             if (choice == 'Y') {
                 dailyFoodLogs.clear();
                 dailyFoodLogs.add(food);
+                return;
             }
+            return;
         }
-
+        dailyFoodLogs.add(food);
     }
 
     public void addWorkoutLog(Workout workout) {
@@ -63,8 +65,6 @@ public class Member extends User {
                 }
                 dailyWorkoutLogs.add(wk);
             }
-
-
         }
     }
 
@@ -86,6 +86,56 @@ public class Member extends User {
 
     @Override
     public void getTrainer(List<Trainer> trainers) {}
+
+    @Override
+    public void showOptions() {
+        System.out.println("\n1. Go to Logger");
+        System.out.println("2. Go to Planner");
+        System.out.println("3. Go to Subscriber");
+        System.out.println("4. Go to Analysis");
+        System.out.println("-1. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    @Override
+    public void runOpt4() throws ExNotSubscribed {
+        Member member = (Member) Authenticator.getInstance().getLoggedUser();
+        if (member.checkPremium()) {
+            member.conductAnalysis();
+        } else {
+            throw new ExNotSubscribed();
+        }
+    }
+
+    @Override
+    public void runOpt2(Scanner scanner) throws ExNotSubscribed {
+        Member member = (Member) Authenticator.getInstance().getLoggedUser();
+        Planner planner = Planner.getInstance();
+        Subscriber sb = Subscriber.getInstance();
+        System.out.println("1. Make a plan.");
+        System.out.println("2. Pick trainer plan.");
+        int plan_opt = scanner.nextInt();
+        if (plan_opt == 1) {
+            planner.makePlan(scanner);
+        } else if (plan_opt == 2) {
+            if (member.checkPremium()) {
+                AllPlans plan = sb.choseTrainerPlan();
+                planner.displayPlan(member);
+            }
+            throw new ExNotSubscribed();
+        }
+    }
+
+    @Override
+    public void runOpt1(Scanner scanner) {
+        LoggerMenu.showLoggerMenu(scanner);
+    }
+
+    @Override
+    public void runOpt3() {
+        Subscriber subscriber = Subscriber.getInstance();
+        subscriber.showSubscriberMenu();
+    }
 
 
     public void setSubscribed() {
