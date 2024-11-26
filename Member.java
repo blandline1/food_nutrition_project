@@ -93,7 +93,7 @@ public class Member extends User {
         System.out.println("2. Go to Planner");
         System.out.println("3. Go to Subscriber");
         System.out.println("4. Go to Analysis");
-        System.out.println("-1. Exit");
+        System.out.println("-1. Log out");
         System.out.print("Enter your choice: ");
     }
 

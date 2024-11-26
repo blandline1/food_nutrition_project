@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,22 +25,24 @@ public class Trainer extends User {
         System.out.println("2. Approve Plan");
         System.out.println("3. Create and Assign Plan");
         System.out.println("4. Check Member Analysis");
-        System.out.println("-1. Exit");
+        System.out.println("-1. Log out");
         System.out.print("Enter your choice: ");
     }
 
     @Override
-    public void runOpt4() {
-
+    public void runOpt1(Scanner scanner) {
+        Subscriber.getInstance().showMyMembers();
     }
 
     @Override
     public void runOpt2(Scanner scanner) {
-
+        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
+        Planner planner = Planner.getInstance();
+        planner.showPlan(member, scanner);
     }
 
     @Override
-    public void runOpt1(Scanner scanner) {
+    public void runOpt4() {
 
     }
 
