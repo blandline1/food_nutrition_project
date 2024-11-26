@@ -1,20 +1,39 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class Food {
     private int calories;
     private int carbs; // in grams
     private int proteins; // in grams
     private int fats; // in grams
-    private List<String> foodList; // List of food items consumed
+    private ArrayList<String> foodList; // List of food items consumed
     private double waterIntake; // in liters
 
-    public Food(int calories, int carbs, int proteins, int fats, List<String> foodList, double waterIntake) {
+    public Food(int calories, int carbs, int proteins, int fats, ArrayList<String> foodList, double waterIntake) {
         this.calories = calories;
         this.carbs = carbs;
         this.proteins = proteins;
         this.fats = fats;
         this.foodList = foodList;
         this.waterIntake = waterIntake;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+    public int getCarbs() {
+        return carbs;
+    }
+    public int getProteins() {
+        return proteins;
+    }
+    public int getFats() {
+        return fats;
+    }
+    public ArrayList<String> getFoodList() {
+        return foodList;
+    }
+    public double getWaterIntake() {
+        return waterIntake;
     }
 
     @Override
