@@ -154,7 +154,7 @@ public class Member extends User {
         ArrayList<Food> expected = ap.getFoodPlan();
         ArrayList<ArrayList<Workout>> expected_wk = ap.getWorkoutPlan();
         analysis.conductFoodAnalysis(expected, dailyFoodLogs);
-        //analysis.conductWorkoutAnalysis(expected_wk, dailyWorkoutLogs);
+        analysis.conductWorkoutAnalysis(expected_wk, dailyWorkoutLogs);
     }
 
 
