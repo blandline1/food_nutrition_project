@@ -11,19 +11,6 @@ public class Workout {
         this.minutes = minutes;
     }
 
-    public String getName() {
-        return name;
-    }
-    public int getSets() {
-        return sets;
-    }
-    public int getReps() {
-        return reps;
-    }
-    public int getMinutes() {
-        return minutes;
-    }
-
     @Override
     public String toString() {
         return "Workout [name=" + name + ", sets=" + sets + ", reps=" + reps + ", minutes=" + minutes + "]";

@@ -27,7 +27,7 @@ public class Planner {
 
             System.out.printf("Day %d:\n", i+1);
             int calories, carbs, proteins, fats, num_foods;
-            ArrayList<String> foodList = new ArrayList<>();
+            List<String> foodList = new ArrayList<>();
             double waterIntake;
 
             // Making food object
@@ -49,7 +49,6 @@ public class Planner {
             System.out.println("Please enter target water intake: ");
             waterIntake = s.nextDouble();
             Food fd = new Food(calories, carbs, proteins, fats, foodList, waterIntake);
-            ret_fd_obj.add(fd);
         }
         
         // Making workout plan
@@ -93,7 +92,7 @@ public class Planner {
         ArrayList<Food> ret_fd_obj = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             int calories, carbs, proteins, fats, num_foods = 0;
-            ArrayList<String> foodList = new ArrayList<>();
+            List<String> foodList = new ArrayList<>();
             double waterIntake = 0.0;
 
             // Making food object

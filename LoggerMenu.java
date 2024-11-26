@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class LoggerMenu {
@@ -56,9 +54,8 @@ public class LoggerMenu {
         String foodItems = scanner.nextLine();
         System.out.print("Enter water intake (in liters): ");
         double waterIntake = scanner.nextDouble();
-        List<String> list_food =  Arrays.asList(foodItems.split(","));
-        ArrayList<String> food_list = new ArrayList<>(list_food);
-        Food food = new Food(calories, carbs, proteins, fats, food_list, waterIntake);
+
+        Food food = new Food(calories, carbs, proteins, fats, Arrays.asList(foodItems.split(",")), waterIntake);
         logger.logFood(member, food);
     }
 
