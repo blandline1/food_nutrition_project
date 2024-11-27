@@ -39,7 +39,10 @@ public abstract class User {
 
     @Override
     public boolean equals(Object user){
-        return name.equals(((User)user).name);
+        if(user instanceof User) {
+            return name.equals(((User)user).name);
+        }
+        return false;
     }
 
     public abstract void getTrainer(List<Trainer> trainers);
@@ -52,5 +55,5 @@ public abstract class User {
 
     public abstract void runOpt1(Scanner scanner);
 
-    public abstract void runOpt3(Scanner scanner);
+    public abstract void runOpt3();
 }
