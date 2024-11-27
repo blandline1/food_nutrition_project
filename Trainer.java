@@ -42,14 +42,12 @@ public class Trainer extends User {
     }
 
     @Override
-    public void runOpt3(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        Planner.getInstance().makePlanTrainer(member,scanner);
-    }
-
-    @Override
     public void runOpt4() {
 
     }
 
+    @Override
+    public void runOpt3() {
+
+    }
 }
