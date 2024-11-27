@@ -17,12 +17,12 @@ public class Analysis {
         return ((double) (xi - Math.abs(xa - xi)) /xi) * 100;
     }
 
-    public double food_biased_weight(int cal, int fats, int prot, int carbs, int hyd, int adher) {
+    public double food_biased_weight(int cal, int fats, int prot, int carbs, double hyd, double adher) {
         return 0.3*cal + 0.1*fats + 0.15*prot + 0.15*carbs + 0.2*hyd + 0.1*adher;
     }
 
-    public double workout_biased_weight(int sets, int reps, int weights) {
-        return 0.3*sets + 0.3*reps + 0.4*weights;
+    public double workout_biased_weight(int sets, int reps, int minutes) {
+        return 0.3*sets + 0.3*reps + 0.4*minutes;
     }
 
     public double adherence_calculator(ArrayList<String> expected, ArrayList<String> actual) {
@@ -47,41 +47,57 @@ public class Analysis {
 
     public void conductFoodAnalysis(ArrayList<Food> expected, ArrayList<Food> actual) {
 
-        double total_cal = 0.0;
-        double total_fats = 0.0;
-        double total_prot = 0.0;
-        double total_carbs = 0.0;
-        double total_hyd = 0.0;
+        double ind_cal = 0.0;
+        double ind_fats = 0.0;
+        double ind_prot = 0.0;
+        double ind_carbs = 0.0;
+        double ind_hyd = 0.0;
+
+        int total_cal = 0;
+        int total_fats = 0;
+        int total_prot = 0;
+        int total_carbs = 0;
+        double total_hyd = 0;
         double adher = 0.0;
+
         double total_biased_weight = 0.0;
         for (int i=0; i<7; i++) {
-            int cal, fats, prot, carbs;
+
             double hyd;
-            cal = actual.get(i).getCalories();
-            fats = actual.get(i).getFats();
-            prot = actual.get(i).getProteins();
-            carbs = actual.get(i).getCarbs();
-            hyd = actual.get(i).getWaterIntake();
-            total_cal += func_Q(expected.get(i).getCalories(), actual.get(i).getCalories());
-            total_fats += func_Q(expected.get(i).getFats(), actual.get(i).getFats());
-            total_prot += func_Q(expected.get(i).getProteins(), actual.get(i).getProteins());
-            total_carbs += func_Q(expected.get(i).getCarbs(), actual.get(i).getCarbs());
-            adher = adherence_calculator(expected.get(i).getFoodList(), actual.get(i).getFoodList());
-            total_hyd += hyd_score(actual.get(i).getWaterIntake(), expected.get(i).getWaterIntake());
-            total_biased_weight += food_biased_weight(cal, fats, prot, carbs, (int)hyd, (int)adher);
+            total_cal += actual.get(i).getCalories();
+            total_fats += actual.get(i).getFats();
+            total_prot += actual.get(i).getProteins();
+            total_carbs += actual.get(i).getCarbs();
+            total_hyd += actual.get(i).getWaterIntake();
+            ind_cal += func_Q(expected.get(i).getCalories(), actual.get(i).getCalories());
+            ind_fats += func_Q(expected.get(i).getFats(), actual.get(i).getFats());
+            ind_prot += func_Q(expected.get(i).getProteins(), actual.get(i).getProteins());
+            ind_carbs += func_Q(expected.get(i).getCarbs(), actual.get(i).getCarbs());
+            adher += adherence_calculator(expected.get(i).getFoodList(), actual.get(i).getFoodList());
+            ind_hyd += hyd_score(actual.get(i).getWaterIntake(), expected.get(i).getWaterIntake());
+
 
         }
         total_cal /= 7;
         total_fats /= 7;
         total_prot /= 7;
         total_carbs /= 7;
+        adher /= 7;
+        ind_cal /= 7;
+        ind_fats /= 7;
+        ind_prot /= 7;
+        ind_carbs /= 7;
+        ind_hyd /= 7;
 
         total_hyd /= 7;
-        total_biased_weight /= 7;
+        total_biased_weight = food_biased_weight(total_cal, total_fats, total_prot, total_carbs, total_hyd, adher);
 
         System.out.println("Individual scores");
-        System.out.printf("Calories: %.2f, Fats: %.2f, Proteins: %.2f, Carbs: %.2f, Water Intake: %.2f\n", total_cal, total_fats, total_prot, total_carbs, total_hyd);
+        System.out.printf("Calories: %.2f, Fats: %.2f, Proteins: %.2f, Carbs: %.2f, Water Intake: %.2f\n", ind_cal, ind_fats, ind_prot, ind_carbs, ind_hyd);
         System.out.printf("Overall score: %.2f", total_biased_weight);
+
+
+
 
     }
 
@@ -145,10 +161,3 @@ public class Analysis {
         System.out.printf("Overall biased score: %.2f", total_biased_weight);
 
     }
-
-
-
-
-
-
-}

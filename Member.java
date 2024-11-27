@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -146,10 +147,14 @@ public class Member extends User {
         return premium;
     }
 
-    public void conductAnalysis() {
+   public void conductAnalysis() {
         Analysis analysis = Analysis.getInstance();
-        analysis.conductFoodAnalysis(this.dailyFoodLogs, dailyFoodLogs);
-        analysis.conductWorkoutAnalysis(this.dailyWorkoutLogs, dailyWorkoutLogs);
+        Planner pln = Planner.getInstance();
+        AllPlans ap = pln.getPlan(this);
+        ArrayList<Food> expected = ap.getFoodPlan();
+        ArrayList<ArrayList<Workout>> expected_wk = ap.getWorkoutPlan();
+        analysis.conductFoodAnalysis(expected, dailyFoodLogs);
+        analysis.conductWorkoutAnalysis(expected_wk, dailyWorkoutLogs);
     }
 
 
