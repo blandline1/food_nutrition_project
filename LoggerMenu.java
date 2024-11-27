@@ -5,7 +5,15 @@ import java.util.Scanner;
 
 public class LoggerMenu {
 
-    public static void showLoggerMenu(Scanner scanner) {
+    private static final LoggerMenu instance = new LoggerMenu();
+
+    private LoggerMenu (){};
+    public static LoggerMenu getInstance(){
+        return instance;
+    }
+
+
+    public void showLoggerMenu(Scanner scanner) {
         boolean exitLogger = false;
         Logger logger = Logger.getInstance();
         Member member = (Member) Authenticator.getInstance().getLoggedUser();
@@ -40,7 +48,7 @@ public class LoggerMenu {
         }
     }
 
-    private static void logFood(Logger logger, Member member, Scanner scanner) {
+    private void logFood(Logger logger, Member member, Scanner scanner) {
         System.out.println("\nLog Food:");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
@@ -62,7 +70,7 @@ public class LoggerMenu {
         logger.logFood(member, food);
     }
 
-    private static void logWorkout(Logger logger, Member member, Scanner scanner) {
+    private void logWorkout(Logger logger, Member member, Scanner scanner) {
         System.out.println("\nLog Workout:");
         System.out.print("Enter workout name: ");
         String name = scanner.nextLine();

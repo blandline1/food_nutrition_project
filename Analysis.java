@@ -103,9 +103,9 @@ public class Analysis {
 
     public void conductWorkoutAnalysis(ArrayList<ArrayList<Workout>> expected, ArrayList<ArrayList<Workout>> actual) {
 
-        int total_sets =0;
-        int total_reps =0;
-        int total_minutes =0;
+        int total_sets = 0;
+        int total_reps = 0;
+        int total_minutes = 0;
 
         int final_sets = 0;
         int final_reps = 0;
@@ -117,16 +117,16 @@ public class Analysis {
         double ind_minutes = 0.0;
         double adherence = 0.0;
 
-        for (int i=0; i<7; i++) {
+        for (int i = 0; i < 7; i++) {
 
-            total_sets =0;
-            total_reps =0;
-            total_minutes =0;
+            total_sets = 0;
+            total_reps = 0;
+            total_minutes = 0;
 
             ArrayList<String> expected_wk = new ArrayList<>();
             ArrayList<String> actual_wk = new ArrayList<>();
             int size = Math.max(expected.get(i).size(), actual.get(i).size());
-            for (int j=0; j<size; j++) {
+            for (int j = 0; j < size; j++) {
                 expected_wk.add(expected.get(i).get(j).getName());
                 actual_wk.add(actual.get(i).get(j).getName());
 
@@ -153,11 +153,11 @@ public class Analysis {
             adherence = adherence_calculator(expected_wk, actual_wk);
 
             System.out.println("Day 1 individual scores: ");
-            System.out.printf("Sets: %.2f, Reps: %.2f, Minutes: %.2f, Adherence: %.2f\n", ind_sets, ind_reps, ind_minutes, adherence );
+            System.out.printf("Sets: %.2f, Reps: %.2f, Minutes: %.2f, Adherence: %.2f\n", ind_sets, ind_reps, ind_minutes, adherence);
 
         }
 
         double total_biased_weight = workout_biased_weight(final_sets, final_reps, final_minutes);
         System.out.printf("Overall biased score: %.2f", total_biased_weight);
-
     }
+}

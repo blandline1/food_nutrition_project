@@ -27,7 +27,7 @@ public class Planner {
 
             System.out.printf("Day %d:\n", i+1);
             int calories, carbs, proteins, fats, num_foods;
-            List<String> foodList = new ArrayList<>();
+            ArrayList<String> foodList = new ArrayList<>();
             double waterIntake;
 
             // Making food object
@@ -91,7 +91,7 @@ public class Planner {
         ArrayList<Food> ret_fd_obj = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             int calories, carbs, proteins, fats, num_foods = 0;
-            List<String> foodList = new ArrayList<>();
+            ArrayList<String> foodList = new ArrayList<>();
             double waterIntake = 0.0;
 
             // Making food object
