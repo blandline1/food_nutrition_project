@@ -1,12 +1,9 @@
 public class Logger {
-    private static Logger instance;
+    private static final Logger instance = new Logger();
 
     private Logger() {}
 
     public static Logger getInstance() {
-        if (instance == null) {
-            instance = new Logger();
-        }
         return instance;
     }
 
