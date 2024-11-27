@@ -27,7 +27,7 @@ public class Planner {
 
             System.out.printf("Day %d:\n", i+1);
             int calories, carbs, proteins, fats, num_foods;
-            ArrayList<String> foodList = new ArrayList<>();
+            List<String> foodList = new ArrayList<>();
             double waterIntake;
 
             // Making food object
@@ -78,14 +78,12 @@ public class Planner {
         }
 
             AllPlans nap = new AllPlans();
-            nap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
-            ArrayList<AllPlans> pln = allPlans.get(mb);
-            pln.add(nap);
-            allPlans.put(mb, pln);
+            nap.updatePlan(ret_fd_obj, ret_wk_obj);
+            allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(nap);
 
     }
 
-    public void makePlanTrainer(Trainer tr, Scanner s) {
+    public void makePlanTrainer(Member mb, Scanner s) {
 
 
         // Making food plan
@@ -93,7 +91,7 @@ public class Planner {
         ArrayList<Food> ret_fd_obj = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             int calories, carbs, proteins, fats, num_foods = 0;
-            ArrayList<String> foodList = new ArrayList<>();
+            List<String> foodList = new ArrayList<>();
             double waterIntake = 0.0;
 
             // Making food object
@@ -143,11 +141,11 @@ public class Planner {
 
 
 
+        Trainer tr = (Trainer) Authenticator.getInstance().getLoggedUser();
         AllPlans ap = new AllPlans();
-        ap.updatePlan(ret_fd_obj, ret_wk_obj, tr);
-        ArrayList<AllPlans> pln = allPlans.get(tr);
-        pln.add(ap);
-        allPlans.put(tr, pln);
+        ap.updatePlan(ret_fd_obj, ret_wk_obj);
+        ap.approve(tr, s);
+        allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(ap);
 
     }
 
