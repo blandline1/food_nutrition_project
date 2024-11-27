@@ -48,8 +48,9 @@ public class Trainer extends User {
     }
 
     @Override
-    public void runOpt4() {
-
+    public void runOpt4(Scanner scanner) {
+        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
+        member.conductAnalysis();
     }
 
 }

@@ -98,7 +98,7 @@ public class Member extends User {
     }
 
     @Override
-    public void runOpt4() throws ExNotSubscribed {
+    public void runOpt4(Scanner scanner) throws ExNotSubscribed {
         Member member = (Member) Authenticator.getInstance().getLoggedUser();
         if (member.checkPremium()) {
             member.conductAnalysis();
@@ -148,8 +148,8 @@ public class Member extends User {
 
     public void conductAnalysis() {
         Analysis analysis = Analysis.getInstance();
-        analysis.conductFoodAnalysis(this, dailyFoodLogs);
-        analysis.conductWorkoutAnalysis(this, dailyWorkoutLogs);
+        analysis.conductFoodAnalysis(this.dailyFoodLogs, dailyFoodLogs);
+        analysis.conductWorkoutAnalysis(this.dailyWorkoutLogs, dailyWorkoutLogs);
     }
 
 

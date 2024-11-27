@@ -83,10 +83,69 @@ public class Analysis {
         System.out.printf("Calories: %.2f, Fats: %.2f, Proteins: %.2f, Carbs: %.2f, Water Intake: %.2f\n", total_cal, total_fats, total_prot, total_carbs, total_hyd);
         System.out.printf("Overall score: %.2f", total_biased_weight);
 
+    }
+
+    public void conductWorkoutAnalysis(ArrayList<ArrayList<Workout>> expected, ArrayList<ArrayList<Workout>> actual) {
+
+        int total_sets =0;
+        int total_reps =0;
+        int total_minutes =0;
+
+        int final_sets = 0;
+        int final_reps = 0;
+        int final_minutes = 0;
 
 
+        double ind_sets = 0.0;
+        double ind_reps = 0.0;
+        double ind_minutes = 0.0;
+        double adherence = 0.0;
+
+        for (int i=0; i<7; i++) {
+
+            total_sets =0;
+            total_reps =0;
+            total_minutes =0;
+
+            ArrayList<String> expected_wk = new ArrayList<>();
+            ArrayList<String> actual_wk = new ArrayList<>();
+            int size = Math.max(expected.get(i).size(), actual.get(i).size());
+            for (int j=0; j<size; j++) {
+                expected_wk.add(expected.get(i).get(j).getName());
+                actual_wk.add(actual.get(i).get(j).getName());
+
+                ind_sets += func_Q(expected.get(i).get(j).getSets(), actual.get(i).get(j).getSets());
+                ind_reps += func_Q(expected.get(i).get(j).getReps(), actual.get(i).get(j).getReps());
+                ind_minutes += func_Q(expected.get(i).get(j).getMinutes(), actual.get(i).get(j).getMinutes());
+
+                total_sets += expected.get(i).get(j).getSets();
+                total_reps += actual.get(i).get(j).getReps();
+                total_minutes += expected.get(i).get(j).getMinutes();
+            }
+            ind_sets /= size;
+            ind_reps /= size;
+            ind_minutes /= size;
+
+            total_sets /= size;
+            total_reps /= size;
+            total_minutes /= size;
+
+            final_sets += total_sets;
+            final_reps += total_reps;
+            final_minutes += total_minutes;
+
+            adherence = adherence_calculator(expected_wk, actual_wk);
+
+            System.out.println("Day 1 individual scores: ");
+            System.out.printf("Sets: %.2f, Reps: %.2f, Minutes: %.2f, Adherence: %.2f\n", ind_sets, ind_reps, ind_minutes, adherence );
+
+        }
+
+        double total_biased_weight = workout_biased_weight(final_sets, final_reps, final_minutes);
+        System.out.printf("Overall biased score: %.2f", total_biased_weight);
 
     }
+
 
 
 
