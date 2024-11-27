@@ -9,7 +9,7 @@ public class AllPlans implements Cloneable{
     private PlanType planType;
     private Trainer associatedTrainer;
 
-    public void updatePlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk){
+    public void updatePlan(ArrayList<Food> fd, ArrayList<ArrayList<Workout>> wk, User usr){
         idealMealPlan = fd;
         idealWorkoutPlan = wk;
         planType = NonApprovedPlan.getInstance();
