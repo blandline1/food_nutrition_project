@@ -3,7 +3,15 @@ import java.util.Scanner;
 
 public class LoggerMenu {
 
-    public static void showLoggerMenu(Scanner scanner) {
+    public static LoggerMenu instance = new LoggerMenu();
+
+    private LoggerMenu() {}
+
+    public static LoggerMenu getInstance() {
+        return instance;
+    }
+
+    public void showLoggerMenu(Scanner scanner) {
         boolean exitLogger = false;
         Logger logger = Logger.getInstance();
         Member member = (Member) Authenticator.getInstance().getLoggedUser();
@@ -21,10 +29,12 @@ public class LoggerMenu {
 
             switch (choice) {
                 case 1:
-                    logFood(logger, member, scanner);
+                    Food food = logFood(scanner);
+                    logger.logFood(member, food);
                     break;
                 case 2:
-                    logWorkout(logger, member, scanner);
+                    Workout workout = logWorkout(scanner);
+                    logger.logWorkout(member, workout);
                     break;
                 case 3:
                     member.showLogs();
@@ -38,7 +48,7 @@ public class LoggerMenu {
         }
     }
 
-    private static void logFood(Logger logger, Member member, Scanner scanner) {
+    private Food logFood(Scanner scanner) {
         System.out.println("\nLog Food:");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
@@ -55,11 +65,10 @@ public class LoggerMenu {
         System.out.print("Enter water intake (in liters): ");
         double waterIntake = scanner.nextDouble();
 
-        Food food = new Food(calories, carbs, proteins, fats, Arrays.asList(foodItems.split(",")), waterIntake);
-        logger.logFood(member, food);
+        return new Food(calories, carbs, proteins, fats, Arrays.asList(foodItems.split(",")), waterIntake);
     }
 
-    private static void logWorkout(Logger logger, Member member, Scanner scanner) {
+    private Workout logWorkout(Scanner scanner) {
         System.out.println("\nLog Workout:");
         System.out.print("Enter workout name: ");
         String name = scanner.nextLine();
@@ -70,7 +79,7 @@ public class LoggerMenu {
         System.out.print("Enter minutes of workout: ");
         int minutes = scanner.nextInt();
 
-        Workout workout = new Workout(name, sets, reps, minutes);
-        logger.logWorkout(member, workout);
+        return new Workout(name, sets, reps, minutes);
+
     }
 }
