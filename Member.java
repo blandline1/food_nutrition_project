@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -129,11 +128,11 @@ public class Member extends User {
 
     @Override
     public void runOpt1(Scanner scanner) {
-        LoggerMenu.showLoggerMenu(scanner);
+        LoggerMenu.getInstance().showLoggerMenu(scanner);
     }
 
     @Override
-    public void runOpt3() {
+    public void runOpt3(Scanner scanner) {
         Subscriber subscriber = Subscriber.getInstance();
         subscriber.showSubscriberMenu();
     }
@@ -149,12 +148,8 @@ public class Member extends User {
 
     public void conductAnalysis() {
         Analysis analysis = Analysis.getInstance();
-        Planner pln = Planner.getInstance();
-        AllPlans ap = pln.getPlan(this);
-        ArrayList<Food> expected = ap.getFoodPlan();
-        ArrayList<ArrayList<Workout>> expected_wk = ap.getWorkoutPlan();
-        analysis.conductFoodAnalysis(expected, dailyFoodLogs);
-        analysis.conductWorkoutAnalysis(expected_wk, dailyWorkoutLogs);
+        analysis.conductFoodAnalysis(this, dailyFoodLogs);
+        analysis.conductWorkoutAnalysis(this, dailyWorkoutLogs);
     }
 
 

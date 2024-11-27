@@ -87,7 +87,7 @@ public class Main {
                             loggedUser.runOpt2(scanner);
                             break;
                         case 3:
-                            loggedUser.runOpt3();
+                            loggedUser.runOpt3(scanner);
                             break;
                         case 4:
                             loggedUser.runOpt4();
