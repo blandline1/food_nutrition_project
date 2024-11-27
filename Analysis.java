@@ -161,11 +161,3 @@ public class Analysis {
         System.out.printf("Overall biased score: %.2f", total_biased_weight);
 
     }
-
-
-
-
-
-
-
-}

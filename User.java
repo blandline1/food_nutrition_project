@@ -39,21 +39,18 @@ public abstract class User {
 
     @Override
     public boolean equals(Object user){
-        if(user instanceof User) {
-            return name.equals(((User)user).name);
-        }
-        return false;
+        return name.equals(((User)user).name);
     }
 
     public abstract void getTrainer(List<Trainer> trainers);
 
     public abstract void showOptions();
 
-    public abstract void runOpt4() throws ExNotSubscribed;
+    public abstract void runOpt4(Scanner scanner) throws ExNotSubscribed;
 
     public abstract void runOpt2(Scanner scanner) throws ExNotSubscribed;
 
     public abstract void runOpt1(Scanner scanner);
 
-    public abstract void runOpt3();
+    public abstract void runOpt3(Scanner scanner);
 }

@@ -1,4 +1,4 @@
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -99,7 +99,7 @@ public class Member extends User {
     }
 
     @Override
-    public void runOpt4() throws ExNotSubscribed {
+    public void runOpt4(Scanner scanner) throws ExNotSubscribed {
         Member member = (Member) Authenticator.getInstance().getLoggedUser();
         if (member.checkPremium()) {
             member.conductAnalysis();
@@ -129,11 +129,11 @@ public class Member extends User {
 
     @Override
     public void runOpt1(Scanner scanner) {
-        LoggerMenu.showLoggerMenu(scanner);
+        LoggerMenu.getInstance().showLoggerMenu(scanner);
     }
 
     @Override
-    public void runOpt3() {
+    public void runOpt3(Scanner scanner) {
         Subscriber subscriber = Subscriber.getInstance();
         subscriber.showSubscriberMenu();
     }
@@ -147,7 +147,7 @@ public class Member extends User {
         return premium;
     }
 
-    public void conductAnalysis() {
+   public void conductAnalysis() {
         Analysis analysis = Analysis.getInstance();
         Planner pln = Planner.getInstance();
         AllPlans ap = pln.getPlan(this);

@@ -90,7 +90,7 @@ public class Main {
                             loggedUser.runOpt3(scanner);
                             break;
                         case 4:
-                            loggedUser.runOpt4();
+                            loggedUser.runOpt4(scanner);
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
@@ -102,10 +102,5 @@ public class Main {
         }finally {
             scanner.close();
         }
-    }
-
-    private static void initData() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("InitData.txt"));
-
     }
 }
