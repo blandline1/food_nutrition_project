@@ -25,7 +25,7 @@ public class Authenticator {
         return instance;
     }
 
-    public void AuthenticatorPrompt() {
+    private void AuthenticatorPrompt() {
         System.out.println("\nWelcome to the Food Nutrition App Authenticator!");
         System.out.println("1. Member sign up");
         System.out.println("2. Trainer sign up");
@@ -91,7 +91,7 @@ public class Authenticator {
         return input != null && !input.trim().isEmpty() && input.length() <= 50;
     }
 
-    public String SignUp(UserType userType, String name, String password) {
+    private String SignUp(UserType userType, String name, String password) {
         if (!isValidInput(name) || !isValidInput(password)) {
             return "Invalid username or password.";
         }
@@ -113,7 +113,7 @@ public class Authenticator {
         }
     }
 
-    public String MemberSignUp(String name, String password) {
+    private String MemberSignUp(String name, String password) {
         Member member = new Member(name, idCount, password);
         users.add(member);
         Planner planner = Planner.getInstance();
@@ -122,7 +122,7 @@ public class Authenticator {
         return "Successfully registered with name " + name + " as member";
     }
 
-    public String TrainerSignUp(String name, String password) {
+    private String TrainerSignUp(String name, String password) {
         Trainer trainer = new Trainer(name, idCount, password);
         users.add(trainer);
         Subscriber subscriber = Subscriber.getInstance();
@@ -131,7 +131,7 @@ public class Authenticator {
         return "Successfully registered with name " + name + " as trainer";
     }
 
-    public User Login(String username, String password) {
+    private User Login(String username, String password) {
         User loggedUser = null;
         for (User user : users) {
             if (user.getName().equals(username)) {
