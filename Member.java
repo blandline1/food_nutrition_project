@@ -128,11 +128,11 @@ public class Member extends User {
 
     @Override
     public void runOpt1(Scanner scanner) {
-        LoggerMenu.showLoggerMenu(scanner);
+        LoggerMenu.getInstance().showLoggerMenu(scanner);
     }
 
     @Override
-    public void runOpt3() {
+    public void runOpt3(Scanner scanner) {
         Subscriber subscriber = Subscriber.getInstance();
         subscriber.showSubscriberMenu();
     }

@@ -49,6 +49,7 @@ public class Planner {
             System.out.println("Please enter target water intake: ");
             waterIntake = s.nextDouble();
             Food fd = new Food(calories, carbs, proteins, fats, foodList, waterIntake);
+            ret_fd_obj.add(fd);
         }
         
         // Making workout plan
@@ -77,14 +78,12 @@ public class Planner {
         }
 
             AllPlans nap = new AllPlans();
-            nap.updatePlan(ret_fd_obj, ret_wk_obj, mb);
-            ArrayList<AllPlans> pln = allPlans.get(mb);
-            pln.add(nap);
-            allPlans.put(mb, pln);
+            nap.updatePlan(ret_fd_obj, ret_wk_obj);
+            allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(nap);
 
     }
 
-    public void makePlanTrainer(Trainer tr, Scanner s) {
+    public void makePlanTrainer(Member mb, Scanner s) {
 
 
         // Making food plan
@@ -142,11 +141,11 @@ public class Planner {
 
 
 
+        Trainer tr = (Trainer) Authenticator.getInstance().getLoggedUser();
         AllPlans ap = new AllPlans();
-        ap.updatePlan(ret_fd_obj, ret_wk_obj, tr);
-        ArrayList<AllPlans> pln = allPlans.get(tr);
-        pln.add(ap);
-        allPlans.put(tr, pln);
+        ap.updatePlan(ret_fd_obj, ret_wk_obj);
+        ap.approve(tr, s);
+        allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(ap);
 
     }
 
