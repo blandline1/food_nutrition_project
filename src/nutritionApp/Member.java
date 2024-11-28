@@ -25,53 +25,42 @@ public class Member extends User {
 
     public void addFoodLog(Food food) {
         Scanner s = new Scanner(System.in);
-        if (dailyFoodLogs.size()==7) {
-            char choice;
-            System.out.print("Food log limit reached, logging now would clear previous logs. Are you sure you want to proceed? (Y/N): ");
-            choice = s.next().charAt(0);
-            if (choice == 'Y') {
-                dailyFoodLogs.clear();
-                dailyFoodLogs.add(food);
-                return;
-            }
-            return;
+        try {
+	        if (dailyFoodLogs.size()==7) {
+	            char choice;
+	            System.out.print("Food log limit reached, logging now would clear previous logs. Are you sure you want to proceed? (Y/N): ");
+	            choice = s.next().charAt(0);
+	            if (choice == 'Y') {
+	                dailyFoodLogs.clear();
+	                dailyFoodLogs.add(food);
+	                return;
+	            }
+	            return;
+	        }
+	        dailyFoodLogs.add(food);
+        }finally {
+        	s.close();
         }
-        dailyFoodLogs.add(food);
     }
 
-    public void addWorkoutLog(Workout workout) {
+    public void addWorkoutLog(ArrayList<Workout> workouts) {
         Scanner s = new Scanner(System.in);
-
-        if(dailyWorkoutLogs.size()==7) {
-
-            char choice;
-            System.out.print("Workout log limit reached, logging now would clear previous logs. Are you sure you want to proceed? (Y/N): ");
-            choice = s.next().charAt(0);
-            if (choice == 'Y') {
-                dailyWorkoutLogs.clear();
-                System.out.print("Enter number of workouts: ");
-                int num_workouts = s.nextInt();
-                System.out.println();
-                ArrayList<Workout> wk = new ArrayList<>();
-                for (int i = 0; i < num_workouts; i++) {
-
-                    System.out.print("Enter workout name: ");
-                    String name = s.nextLine();
-                    System.out.print("Enter number of sets: ");
-                    int sets = s.nextInt();
-                    System.out.println();
-                    System.out.print("Enter number of reps: ");
-                    int reps = s.nextInt();
-                    System.out.println();
-                    System.out.print("Enter number of calories burned: ");
-                    int calBurnt = s.nextInt();
-                    System.out.println();
-                    Workout wk_el = new Workout(name, sets, reps, calBurnt);
-                    wk.add(wk_el);
-                }
-                dailyWorkoutLogs.add(wk);
-            }
-        }
+    	try {
+	        if(dailyWorkoutLogs.size()==7) {
+	            char choice;
+	            System.out.print("Workout log limit reached, logging now would clear previous logs. Are you sure you want to proceed? (Y/N): ");
+	            choice = s.next().charAt(0);
+	            if (choice == 'Y') {
+	                dailyWorkoutLogs.clear();
+	                dailyWorkoutLogs.add(workouts);
+	                return;
+	            }
+	            return;
+	        }
+	        dailyWorkoutLogs.add(workouts);
+    	}finally {
+    		s.close();
+    	}
     }
 
     public void showLogs() {

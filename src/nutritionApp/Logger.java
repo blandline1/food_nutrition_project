@@ -1,4 +1,7 @@
 package nutritionApp;
+
+import java.util.ArrayList;
+
 public class Logger {
     private static Logger instance;
 
@@ -16,8 +19,8 @@ public class Logger {
         System.out.println("Food log added for member: " + member.getName());
     }
 
-    public void logWorkout(Member member, Workout workout) {
-        member.addWorkoutLog(workout);
+    public void logWorkout(Member member, ArrayList<Workout> workouts) {
+        member.addWorkoutLog(workouts);
         System.out.println("Workout log added for member: " + member.getName());
     }
 }

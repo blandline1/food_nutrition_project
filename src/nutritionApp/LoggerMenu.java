@@ -35,11 +35,10 @@ public class LoggerMenu {
                 case 1:
                     Food food = logFood(scanner);
                     logger.logFood(member, food);
-                    
                     break;
                 case 2:
-                    Workout workout = logWorkout(scanner);
-                    logger.logWorkout(member, workout);
+                    ArrayList<Workout> workouts = logWorkout(scanner);
+                    logger.logWorkout(member, workouts);
                     break;
                 case 3:
                     member.showLogs();
@@ -54,7 +53,7 @@ public class LoggerMenu {
     }
 
     private Food logFood(Scanner scanner) {
-        System.out.println("\nLog Food:");
+        System.out.println("\nLog Food!");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
         System.out.print("Enter carbs (in grams): ");
@@ -74,18 +73,30 @@ public class LoggerMenu {
         return new Food(calories, carbs, proteins, fats, food_list, waterIntake);
     }
 
-    private Workout logWorkout(Scanner scanner) {
-        System.out.println("\nLog Workout:");
-        System.out.print("Enter workout name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter sets: ");
-        int sets = scanner.nextInt();
-        System.out.print("Enter reps: ");
-        int reps = scanner.nextInt();
-        System.out.print("Enter minutes of workout: ");
-        int minutes = scanner.nextInt();
+    private ArrayList<Workout> logWorkout(Scanner s) {
+    	System.out.println("\nLog Workout!");
+    	System.out.print("Enter number of workouts: ");
+    	 int num_workouts = s.nextInt();
+         System.out.println();
+         ArrayList<Workout> wk = new ArrayList<>();
+         for (int i = 0; i < num_workouts; i++) {
 
-        return new Workout(name, sets, reps, minutes);
+             System.out.print("Enter workout name: ");
+             String name = s.nextLine();
+             System.out.print("Enter number of sets: ");
+             int sets = s.nextInt();
+             System.out.println();
+             System.out.print("Enter number of reps: ");
+             int reps = s.nextInt();
+             System.out.println();
+             System.out.print("Enter number of calories burned: ");
+             int calBurnt = s.nextInt();
+             System.out.println();
+             Workout wk_el = new Workout(name, sets, reps, calBurnt);
+             wk.add(wk_el);
+         }
+
+        return wk;
         
     }
 }
