@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Trainer extends User {
+	
+	private static final Command cmd = Command.getInstance();
 
     public Trainer(String name, int id, String password) {
         super(name, id, password);
@@ -33,25 +35,21 @@ public class Trainer extends User {
     
     @Override
     public void runOpt1(Scanner scanner) {
-       Command cmd = Command.getInstance();
        cmd.trainerrunOpt1(scanner);
     }
 
     @Override
     public void runOpt2(Scanner scanner) {
-    	Command cmd = Command.getInstance();
     	cmd.trainerrunOpt2(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-    	Command cmd = Command.getInstance();
     	cmd.trainerrunOpt3(scanner);
     }
 
     @Override
     public void runOpt4(Scanner scanner) {
-        Command cmd = Command.getInstance();
         cmd.trainerrunOpt4(scanner);
     }
 

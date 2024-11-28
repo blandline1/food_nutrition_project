@@ -9,6 +9,8 @@ public class Member extends User {
     private ArrayList<Food> dailyFoodLogs;
     private ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
     private boolean premium = false;
+	private static final Command cmd = Command.getInstance();
+
 
     public Member(String name, int id, String password) {
         super(name, id, password);
@@ -94,27 +96,21 @@ public class Member extends User {
 
     @Override
     public void runOpt2(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
-    
-    	Command cmd = Command.getInstance();
-    	cmd.MemberrunOpt2(scanner);
+        cmd.MemberrunOpt2(scanner);
     }
 
     @Override
     public void runOpt1(Scanner scanner) {
-        Command cmd = Command.getInstance();
         cmd.MemberrunOpt1(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-        Command cmd = Command.getInstance();
         cmd.MemberrunOpt3(scanner);
-    	
     }
     
     @Override
     public void runOpt4(Scanner scanner) throws ExNotSubscribed {
-        Command cmd = Command.getInstance();
         cmd.MemberrunOpt4(scanner);
     }
 
