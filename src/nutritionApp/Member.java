@@ -6,10 +6,14 @@ import java.util.Scanner;
 
 public class Member extends User {
 
+    private ArrayList<Food> dailyFoodLogs;
+    private ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
     private boolean premium = false;
 
     public Member(String name, int id, String password) {
         super(name, id, password);
+        this.dailyFoodLogs = new ArrayList<>();
+        this.dailyWorkoutLogs = new ArrayList<>();
     }
 
     @Override

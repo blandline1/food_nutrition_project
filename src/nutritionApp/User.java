@@ -7,15 +7,11 @@ public abstract class User {
     protected String name;
     protected String password;
     protected int id;
-    protected ArrayList<Food> dailyFoodLogs;
-    protected ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
   
     public User(String name, int id, String password) {
         this.name = name;
         this.password = password;
         this.id = id;
-        this.dailyFoodLogs = new ArrayList<>();
-        this.dailyWorkoutLogs = new ArrayList<>();
     }
 
     public String getName() {
