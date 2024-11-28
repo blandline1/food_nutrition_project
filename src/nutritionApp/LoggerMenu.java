@@ -52,7 +52,7 @@ public class LoggerMenu {
         }
     }
 
-    private Food logFood(Scanner scanner) {
+    public Food logFood(Scanner scanner) {
         System.out.println("\nLog Food!");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
@@ -76,7 +76,11 @@ public class LoggerMenu {
     private ArrayList<Workout> logWorkout(Scanner s) {
     	System.out.println("\nLog Workout!");
     	System.out.print("Enter number of workouts: ");
-    	 int num_workouts = s.nextInt();
+    	return getDailyWorkout(s);
+        
+    }
+	public ArrayList<Workout> getDailyWorkout(Scanner s) {
+		int num_workouts = s.nextInt();
          System.out.println();
          ArrayList<Workout> wk = new ArrayList<>();
          for (int i = 0; i < num_workouts; i++) {
@@ -91,12 +95,12 @@ public class LoggerMenu {
              System.out.println();
              System.out.print("Enter number of calories burned: ");
              int calBurnt = s.nextInt();
+             System.out.print("Enter number of calories burned: ");
+             int minutes = s.nextInt();
              System.out.println();
-             Workout wk_el = new Workout(name, sets, reps, calBurnt);
+             Workout wk_el = new Workout(name, sets, reps, calBurnt, minutes);
              wk.add(wk_el);
          }
-
-        return wk;
-        
-    }
+		return wk;
+	}
 }

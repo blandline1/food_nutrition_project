@@ -19,129 +19,53 @@ public class Planner {
         allPlans.put(member, new ArrayList<>());
     }
 
-    public void makePlan(Scanner s) {
+    public void makePlanForMember(Scanner s) {
 
         Member mb = (Member) Authenticator.getInstance().getLoggedUser();
 
         // Making food plan
-        ArrayList<Food> ret_fd_obj = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-
-            System.out.printf("Day %d:\n", i+1);
-            int calories, carbs, proteins, fats, num_foods;
-            ArrayList<String> foodList = new ArrayList<>();
-            double waterIntake;
-
-            // Making food object
-            System.out.println("Please enter target calories: ");
-            calories = s.nextInt();
-            System.out.println("Please enter target carbs: ");
-            carbs = s.nextInt();
-            System.out.println("Please enter target proteins: ");
-            proteins = s.nextInt();
-            System.out.println("Please enter target fats: ");
-            fats = s.nextInt();
-            System.out.println("Please enter desired number of foods in food list: ");
-            num_foods = s.nextInt();
-            s.nextLine(); // consume new line
-            for (int j = 0; j < num_foods; j++) {
-                System.out.println("Please enter food: ");
-                foodList.add(s.nextLine());
-            }
-            System.out.println("Please enter target water intake: ");
-            waterIntake = s.nextDouble();
-            Food fd = new Food(calories, carbs, proteins, fats, foodList, waterIntake);
-            ret_fd_obj.add(fd);
-        }
+        ArrayList<Food> ret_fd_obj = getFoodPlan(s);
         
         // Making workout plan
-        System.out.println("Please enter number of workouts in each day: ");
-        int num_works = s.nextInt();
+        ArrayList<ArrayList<Workout>> ret_wk_obj = getWorkoutPlan(s);
+
+        AllPlans nap = new AllPlans();
+        nap.updatePlan(ret_fd_obj, ret_wk_obj);
+        allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(nap);
+
+    }
+
+	private ArrayList<ArrayList<Workout>> getWorkoutPlan(Scanner s) {
         ArrayList<ArrayList<Workout>> ret_wk_obj = new ArrayList<>();
         int reps, sets, minutes, calBurnt = 0;
         String wk_name = "";
         
+        LoggerMenu loggerMenu = LoggerMenu.getInstance();
+        
         for (int i = 0; i < 7; i++) {
             System.out.printf("Day %d:\n", i+1);
-            ArrayList<Workout> wk_list = new ArrayList<>();
-            for (int j = 0; j < num_works; j++) {
-                System.out.println("Please enter workout: ");
-                s.nextLine();
-                wk_name = s.nextLine();
-                System.out.println("Please enter number of sets: ");
-                sets = s.nextInt();
-                System.out.println("Please enter number of reps: ");
-                reps = s.nextInt();
-                System.out.println("Please enter minutes: ");
-                minutes = s.nextInt();
-                wk_list.add(new Workout(wk_name, sets, reps, minutes));
-            }
-            ret_wk_obj.add(wk_list);
+            ret_wk_obj.add(loggerMenu.getDailyWorkout(s));
         }
+		return ret_wk_obj;
+	}
 
-            AllPlans nap = new AllPlans();
-            nap.updatePlan(ret_fd_obj, ret_wk_obj);
-            allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(nap);
-
-    }
+	private ArrayList<Food> getFoodPlan(Scanner s) {
+		ArrayList<Food> ret_fd_obj = new ArrayList<>();
+		LoggerMenu loggerMenu = LoggerMenu.getInstance();
+        for (int i = 0; i < 7; i++) {
+            ret_fd_obj.add(loggerMenu.logFood(s));
+        }
+		return ret_fd_obj;
+	}
 
     public void makePlanTrainer(Member mb, Scanner s) {
 
 
         // Making food plan
+        ArrayList<Food> ret_fd_obj = getFoodPlan(s);
 
-        ArrayList<Food> ret_fd_obj = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            int calories, carbs, proteins, fats, num_foods = 0;
-            ArrayList<String> foodList = new ArrayList<>();
-            double waterIntake = 0.0;
-
-            // Making food object
-
-            System.out.println("Please enter target calories: ");
-            calories = s.nextInt();
-            System.out.println("Please enter target carbs: ");
-            carbs = s.nextInt();
-            System.out.println("Please enter target proteins: ");
-            proteins = s.nextInt();
-            System.out.println("Please enter target fats: ");
-            fats = s.nextInt();
-            System.out.println("Please enter desired number of foods in food list: ");
-            num_foods = s.nextInt();
-            for (int j = 0; j < num_foods; j++) {
-                System.out.println("Please enter food: ");
-                foodList.add(s.next());
-            }
-            System.out.println("Please enter target water intake: ");
-            waterIntake = s.nextDouble();
-            Food fd = new Food(calories, carbs, proteins, fats, foodList, waterIntake);
-        }
-
-        // Making workout plan
-
-        System.out.println("Please enter number of workouts in each day: ");
-        int num_works = s.nextInt();
-        ArrayList<ArrayList<Workout>> ret_wk_obj = new ArrayList<>();
-        int reps, sets, minutes, calBurnt = 0;
-        String wk_name = "";
-
-        for (int i = 0; i < 7; i++) {
-            ArrayList<Workout> wk_list = new ArrayList<>();
-            for (int j = 0; j < num_works; j++) {
-                System.out.println("Please enter workout: ");
-                wk_name = s.nextLine();
-                System.out.println("Please enter number of sets: ");
-                sets = s.nextInt();
-                System.out.println("Please enter number of reps: ");
-                reps = s.nextInt();
-                System.out.println("Please enter minutes: ");
-                minutes = s.nextInt();
-                wk_list.add(new Workout(wk_name, sets, reps, minutes));
-            }
-            ret_wk_obj.add(wk_list);
-        }
-
-
+        // Making work out plan
+        ArrayList<ArrayList<Workout>> ret_wk_obj = getWorkoutPlan(s);
 
         Trainer tr = (Trainer) Authenticator.getInstance().getLoggedUser();
         AllPlans ap = new AllPlans();
@@ -202,7 +126,7 @@ public class Planner {
         System.out.println("2. Pick trainer plan.");
         int plan_opt = scanner.nextInt();
         if (plan_opt == 1) {
-            planner.makePlan(scanner);
+            planner.makePlanForMember(scanner);
         } else if (plan_opt == 2) {
             if (member.checkPremium()) {
                 Trainer trainer = sb.choseTrainerPlan();

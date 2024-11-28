@@ -5,7 +5,7 @@ public class Workout {
     private int reps;
     private int minutes;
 
-    public Workout(String name, int sets, int reps, int caloriesBurned) {
+    public Workout(String name, int sets, int reps, int caloriesBurned, int minutes) {
         this.name = name;
         this.sets = sets;
         this.reps = reps;

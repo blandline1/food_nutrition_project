@@ -94,13 +94,10 @@ public class Subscriber {
 
     public Trainer choseTrainerPlan() throws ExNotSubscribed {
         Member mb = (Member) Authenticator.getInstance().getLoggedUser();
-        List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
-        Trainer trainer = null;
-        for (Trainer trn : trainerlist) {
-            List<Member> memberList = subscribeTrainers.get(trn);
-        if (memberList.contains(mb)) {
-              return trn;
-        }
+        for(Trainer trainer : subscribeTrainers.keySet()){
+        	if(subscribeTrainers.get(trainer).contains(mb)) {
+        		return trainer;
+        	}
         }
         throw new ExNotSubscribed();
     }
