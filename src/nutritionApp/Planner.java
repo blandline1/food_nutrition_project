@@ -19,9 +19,9 @@ public class Planner {
         allPlans.put(member, new ArrayList<>());
     }
 
-    public void makePlanForMember(Scanner s) {
+    public void makePlan(Scanner s) {
 
-        Member mb = (Member) Authenticator.getInstance().getLoggedUser();
+        User usr = Authenticator.getInstance().getLoggedUser();
 
         // Making food plan
         ArrayList<Food> ret_fd_obj = getFoodPlan(s);
@@ -31,14 +31,12 @@ public class Planner {
 
         AllPlans nap = new AllPlans();
         nap.updatePlan(ret_fd_obj, ret_wk_obj);
-        allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(nap);
+        allPlans.computeIfAbsent(usr, k -> new ArrayList<>()).add(nap);
 
     }
 
 	private ArrayList<ArrayList<Workout>> getWorkoutPlan(Scanner s) {
         ArrayList<ArrayList<Workout>> ret_wk_obj = new ArrayList<>();
-        int reps, sets, minutes, calBurnt = 0;
-        String wk_name = "";
         
         LoggerMenu loggerMenu = LoggerMenu.getInstance();
         
@@ -58,7 +56,7 @@ public class Planner {
 		return ret_fd_obj;
 	}
 
-    public void makePlanTrainer(Member mb, Scanner s) {
+    public void makePlanForCustomer(User usr, Scanner s) {
 
 
         // Making food plan
@@ -71,7 +69,7 @@ public class Planner {
         AllPlans ap = new AllPlans();
         ap.updatePlan(ret_fd_obj, ret_wk_obj);
         ap.approve(tr, s);
-        allPlans.computeIfAbsent(mb, k -> new ArrayList<>()).add(ap);
+        allPlans.computeIfAbsent(usr, k -> new ArrayList<>()).add(ap);
 
     }
 
@@ -119,20 +117,27 @@ public class Planner {
     }
 
 	public void showMemberPlannerMenu(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
-		Member member = (Member) Authenticator.getInstance().getLoggedUser();
-        Planner planner = Planner.getInstance();
         Subscriber sb = Subscriber.getInstance();
         System.out.println("1. Make a plan.");
         System.out.println("2. Pick trainer plan.");
         int plan_opt = scanner.nextInt();
         if (plan_opt == 1) {
-            planner.makePlanForMember(scanner);
+        	makePlan(scanner);
         } else if (plan_opt == 2) {
-            if (member.checkPremium()) {
-                Trainer trainer = sb.choseTrainerPlan();
-                planner.displayPlan(trainer);
-            }
-            throw new ExNotSubscribed();
+        	Trainer trainer = sb.getTrainer();
+            displayPlan(trainer);
+        }
+	}
+	
+	public void showTrainerPlannerMenu(Scanner scanner) {
+        System.out.println("1. Make your default plan.");
+        System.out.println("2. Make custom plan for specific customer ");
+        int plan_opt = scanner.nextInt();
+        if(plan_opt == 1) {
+        	Planner.getInstance().makePlan(scanner);
+        }else if(plan_opt == 1) {
+            Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
+            Planner.getInstance().makePlanForCustomer(member,scanner);
         }
 	}
 }

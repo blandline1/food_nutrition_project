@@ -1,5 +1,5 @@
 package nutritionApp;
-import java.util.*;
+
 
 public class ApprovedPlan implements PlanType {
 

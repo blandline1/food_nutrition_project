@@ -1,6 +1,5 @@
 package nutritionApp;
-import java.lang.reflect.Array;
-import java.util.HashMap;
+
 import java.util.*;
 
 public class AllPlans implements Cloneable{

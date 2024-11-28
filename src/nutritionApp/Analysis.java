@@ -64,7 +64,6 @@ public class Analysis {
         double total_biased_weight = 0.0;
         for (int i=0; i<7; i++) {
 
-            double hyd;
             total_cal += actual.get(i).getCalories();
             total_fats += actual.get(i).getFats();
             total_prot += actual.get(i).getProteins();

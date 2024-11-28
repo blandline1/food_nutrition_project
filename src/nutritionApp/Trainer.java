@@ -1,5 +1,5 @@
 package nutritionApp;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,8 +44,7 @@ public class Trainer extends User {
 
     @Override
     public void runOpt3(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        Planner.getInstance().makePlanTrainer(member,scanner);
+    	Planner.getInstance().showTrainerPlannerMenu(scanner);
     }
 
     @Override

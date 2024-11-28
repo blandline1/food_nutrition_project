@@ -92,12 +92,14 @@ public class Subscriber {
         subscribeTrainers.put(trainer, new ArrayList<>());
     }
 
-    public Trainer choseTrainerPlan() throws ExNotSubscribed {
+    public Trainer getTrainer() throws ExNotSubscribed {
         Member mb = (Member) Authenticator.getInstance().getLoggedUser();
-        for(Trainer trainer : subscribeTrainers.keySet()){
-        	if(subscribeTrainers.get(trainer).contains(mb)) {
-        		return trainer;
-        	}
+        if(mb.checkPremium()) {
+	        for(Trainer trainer : subscribeTrainers.keySet()){
+	        	if(subscribeTrainers.get(trainer).contains(mb)) {
+	        		return trainer;
+	        	}
+	        }
         }
         throw new ExNotSubscribed();
     }
