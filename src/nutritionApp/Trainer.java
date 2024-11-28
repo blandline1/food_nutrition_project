@@ -29,28 +29,31 @@ public class Trainer extends User {
         System.out.println("-1. Log out");
         System.out.print("Enter your choice: ");
     }
-
+    
+    
     @Override
     public void runOpt1(Scanner scanner) {
-        Subscriber.getInstance().showMyMembers();
+       Command cmd = Command.getInstance();
+       cmd.trainerrunOpt1(scanner);
     }
 
     @Override
     public void runOpt2(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        Planner planner = Planner.getInstance();
-        planner.showPlan(member, scanner);
+    	Command cmd = Command.getInstance();
+    	cmd.trainerrunOpt2(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-    	Planner.getInstance().showTrainerPlannerMenu(scanner);
+    	Command cmd = Command.getInstance();
+    	cmd.trainerrunOpt3(scanner);
     }
 
     @Override
     public void runOpt4(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        member.conductAnalysis();
+        Command cmd = Command.getInstance();
+        cmd.trainerrunOpt4(scanner);
     }
+
 
 }

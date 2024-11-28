@@ -94,28 +94,28 @@ public class Member extends User {
 
     @Override
     public void runOpt2(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
-    	Planner.getInstance().showMemberPlannerMenu(scanner);
+    
+    	Command cmd = Command.getInstance();
+    	cmd.MemberrunOpt2(scanner);
     }
 
     @Override
     public void runOpt1(Scanner scanner) {
-        LoggerMenu.getInstance().showLoggerMenu(scanner);
+        Command cmd = Command.getInstance();
+        cmd.MemberrunOpt1(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-        Subscriber subscriber = Subscriber.getInstance();
-        subscriber.showSubscriberMenu();
+        Command cmd = Command.getInstance();
+        cmd.MemberrunOpt3(scanner);
+    	
     }
     
     @Override
     public void runOpt4(Scanner scanner) throws ExNotSubscribed {
-        Member member = (Member) Authenticator.getInstance().getLoggedUser();
-        if (member.checkPremium()) {
-            member.conductAnalysis();
-        } else {
-            throw new ExNotSubscribed();
-        }
+        Command cmd = Command.getInstance();
+        cmd.MemberrunOpt4(scanner);
     }
 
     public void setSubscribed() {
