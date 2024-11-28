@@ -57,9 +57,4 @@ public class Main {
             scanner.close();
         }
     }
-
-    private static void initData() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("InitData.txt"));
-
-    }
 }

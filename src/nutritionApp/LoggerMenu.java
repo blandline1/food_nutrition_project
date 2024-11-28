@@ -33,10 +33,13 @@ public class LoggerMenu {
 
             switch (choice) {
                 case 1:
-                    logFood(logger, member, scanner);
+                    Food food = logFood(scanner);
+                    logger.logFood(member, food);
+                    
                     break;
                 case 2:
-                    logWorkout(logger, member, scanner);
+                    Workout workout = logWorkout(scanner);
+                    logger.logWorkout(member, workout);
                     break;
                 case 3:
                     member.showLogs();
@@ -50,7 +53,7 @@ public class LoggerMenu {
         }
     }
 
-    private void logFood(Logger logger, Member member, Scanner scanner) {
+    private Food logFood(Scanner scanner) {
         System.out.println("\nLog Food:");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
@@ -68,11 +71,10 @@ public class LoggerMenu {
         double waterIntake = scanner.nextDouble();
         List<String> list_food =  Arrays.asList(foodItems.split(","));
         ArrayList<String> food_list = new ArrayList<>(list_food);
-        Food food = new Food(calories, carbs, proteins, fats, food_list, waterIntake);
-        logger.logFood(member, food);
+        return new Food(calories, carbs, proteins, fats, food_list, waterIntake);
     }
 
-    private void logWorkout(Logger logger, Member member, Scanner scanner) {
+    private Workout logWorkout(Scanner scanner) {
         System.out.println("\nLog Workout:");
         System.out.print("Enter workout name: ");
         String name = scanner.nextLine();
@@ -83,7 +85,7 @@ public class LoggerMenu {
         System.out.print("Enter minutes of workout: ");
         int minutes = scanner.nextInt();
 
-        Workout workout = new Workout(name, sets, reps, minutes);
-        logger.logWorkout(member, workout);
+        return new Workout(name, sets, reps, minutes);
+        
     }
 }
