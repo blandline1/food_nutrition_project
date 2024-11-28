@@ -45,7 +45,7 @@ public abstract class User {
 
     public abstract void runOpt4(Scanner scanner) throws ExNotSubscribed;
 
-    public abstract void runOpt2(Scanner scanner) throws ExNotSubscribed;
+    public abstract void runOpt2(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan;
 
     public abstract void runOpt1(Scanner scanner);
 

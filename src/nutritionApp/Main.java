@@ -53,7 +53,9 @@ public class Main {
             }
         } catch (ExNotSubscribed e) {
             System.out.println(e.getMessage());
-        }finally {
+        } catch (ExNoTrainerPlan e) {
+        	System.out.println(e.getMessage());
+		}finally {
             scanner.close();
         }
     }

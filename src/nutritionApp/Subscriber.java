@@ -41,6 +41,7 @@ public class Subscriber {
                     showSubscribedStats();
                     break;
                 case -1:
+                	scanner.close();
                     return;
                 default:
                     System.out.println("Invalid choice");
@@ -91,30 +92,17 @@ public class Subscriber {
         subscribeTrainers.put(trainer, new ArrayList<>());
     }
 
-    public AllPlans choseTrainerPlan() {
-        try{
-            Member mb = (Member) Authenticator.getInstance().getLoggedUser();
-            List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
-            Trainer trainer = null;
-            for (Trainer trn : trainerlist) {
-                List<Member> memberList = subscribeTrainers.get(trn);
-                if (memberList.contains(mb)) {
-                    trainer = trn;
-                    break;
-                }
-            }
-            Planner planner = Planner.getInstance();
-            AllPlans plan = planner.getPlan(trainer);
-            if (plan == null) {
-                throw new ExNoTrainerPlan();
-            }
-            return plan;
+    public Trainer choseTrainerPlan() throws ExNotSubscribed {
+        Member mb = (Member) Authenticator.getInstance().getLoggedUser();
+        List<Trainer> trainerlist = (Authenticator.getInstance()).getAllTrainers();
+        Trainer trainer = null;
+        for (Trainer trn : trainerlist) {
+            List<Member> memberList = subscribeTrainers.get(trn);
+        if (memberList.contains(mb)) {
+              return trn;
         }
-        catch (ExNoTrainerPlan e) {
-            System.out.println(e.getMessage());
         }
-        return null;
-
+        throw new ExNotSubscribed();
     }
 
     public List<Member> showMyMembers() {

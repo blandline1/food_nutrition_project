@@ -162,7 +162,7 @@ public class Planner {
 
     }
 
-    public void displayPlan(User usr) {
+    public void displayPlan(User usr) throws ExNoTrainerPlan {
         AllPlans pln = getPlan(usr);
         if (pln != null) {
             ArrayList<Food> fd = pln.getFoodPlan();
@@ -181,6 +181,7 @@ public class Planner {
                 counter++;
             }
         }
+        throw new ExNoTrainerPlan();
     }
 
     public void showPlan(Member member, Scanner scanner) {
@@ -192,4 +193,22 @@ public class Planner {
             System.out.println("User does not have any plan yet!!");
         }
     }
+
+	public void showMemberPlannerMenu(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
+		Member member = (Member) Authenticator.getInstance().getLoggedUser();
+        Planner planner = Planner.getInstance();
+        Subscriber sb = Subscriber.getInstance();
+        System.out.println("1. Make a plan.");
+        System.out.println("2. Pick trainer plan.");
+        int plan_opt = scanner.nextInt();
+        if (plan_opt == 1) {
+            planner.makePlan(scanner);
+        } else if (plan_opt == 2) {
+            if (member.checkPremium()) {
+                Trainer trainer = sb.choseTrainerPlan();
+                planner.displayPlan(trainer);
+            }
+            throw new ExNotSubscribed();
+        }
+	}
 }

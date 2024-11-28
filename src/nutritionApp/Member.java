@@ -93,32 +93,8 @@ public class Member extends User {
     }
 
     @Override
-    public void runOpt4(Scanner scanner) throws ExNotSubscribed {
-        Member member = (Member) Authenticator.getInstance().getLoggedUser();
-        if (member.checkPremium()) {
-            member.conductAnalysis();
-        } else {
-            throw new ExNotSubscribed();
-        }
-    }
-
-    @Override
-    public void runOpt2(Scanner scanner) throws ExNotSubscribed {
-        Member member = (Member) Authenticator.getInstance().getLoggedUser();
-        Planner planner = Planner.getInstance();
-        Subscriber sb = Subscriber.getInstance();
-        System.out.println("1. Make a plan.");
-        System.out.println("2. Pick trainer plan.");
-        int plan_opt = scanner.nextInt();
-        if (plan_opt == 1) {
-            planner.makePlan(scanner);
-        } else if (plan_opt == 2) {
-            if (member.checkPremium()) {
-                AllPlans plan = sb.choseTrainerPlan();
-                planner.displayPlan(member);
-            }
-            throw new ExNotSubscribed();
-        }
+    public void runOpt2(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
+    	Planner.getInstance().showMemberPlannerMenu(scanner);
     }
 
     @Override
@@ -131,7 +107,16 @@ public class Member extends User {
         Subscriber subscriber = Subscriber.getInstance();
         subscriber.showSubscriberMenu();
     }
-
+    
+    @Override
+    public void runOpt4(Scanner scanner) throws ExNotSubscribed {
+        Member member = (Member) Authenticator.getInstance().getLoggedUser();
+        if (member.checkPremium()) {
+            member.conductAnalysis();
+        } else {
+            throw new ExNotSubscribed();
+        }
+    }
 
     public void setSubscribed() {
         premium = true;
