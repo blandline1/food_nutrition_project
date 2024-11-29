@@ -8,12 +8,13 @@ public class Member extends User {
 
     private ArrayList<Food> dailyFoodLogs;
     private ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
-    private boolean premium = false;
+    private boolean premium;
 
     public Member(String name, int id, String password) {
         super(name, id, password);
         this.dailyFoodLogs = new ArrayList<>();
         this.dailyWorkoutLogs = new ArrayList<>();
+        premium = false;
     }
 
     @Override
@@ -39,7 +40,6 @@ public class Member extends User {
 	        }
 	        dailyFoodLogs.add(food);
         }finally {
-        	s.close();
         }
     }
 
@@ -105,7 +105,7 @@ public class Member extends User {
     @Override
     public void runOpt3(Scanner scanner) {
         Subscriber subscriber = Subscriber.getInstance();
-        subscriber.showSubscriberMenu();
+        subscriber.showSubscriberMenu(scanner);
     }
     
     @Override

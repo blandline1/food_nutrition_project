@@ -80,8 +80,9 @@ public class LoggerMenu {
         
     }
 	public ArrayList<Workout> getDailyWorkout(Scanner s) {
+        System.out.print("Enter number of workouts: ");
 		int num_workouts = s.nextInt();
-         System.out.println();
+		s.nextLine(); //consume newLine
          ArrayList<Workout> wk = new ArrayList<>();
          for (int i = 0; i < num_workouts; i++) {
 
@@ -89,15 +90,14 @@ public class LoggerMenu {
              String name = s.nextLine();
              System.out.print("Enter number of sets: ");
              int sets = s.nextInt();
-             System.out.println();
              System.out.print("Enter number of reps: ");
              int reps = s.nextInt();
-             System.out.println();
              System.out.print("Enter number of calories burned: ");
              int calBurnt = s.nextInt();
-             System.out.print("Enter number of calories burned: ");
+             System.out.print("Enter number of minute: ");
              int minutes = s.nextInt();
              System.out.println();
+             s.nextLine();
              Workout wk_el = new Workout(name, sets, reps, calBurnt, minutes);
              wk.add(wk_el);
          }

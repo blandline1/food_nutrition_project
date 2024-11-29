@@ -5,30 +5,29 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-//        Scanner scanner = new Scanner(new File("1.txt"));
-//        //runningProgram(scanner);
-//        scanner.close();
+//        Scanner s = new Scanner(new File("C:\\Users\\ahmad\\eclipse-workspace\\NutritionApp\\src\\nutritionApp\\ApprovePlan.txt"));
+//        runningProgram(s);
+//        s.close();
         Scanner scanner = new Scanner(System.in);
         runningProgram(scanner);
+        scanner.close();
 
     }
 
     private static void runningProgram(Scanner scanner) {
         boolean exit = false;
 
-        try (scanner) {
+        try  {
             while (!exit) {
                 Authenticator authenticator = Authenticator.getInstance();
                 exit = authenticator.LoginPage(scanner);
                 User loggedUser = authenticator.getLoggedUser();
-
+                
                 while (!exit && loggedUser != null) {
 
                     loggedUser.showOptions();
 
                     int choice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-
                     switch (choice) {
                         case -1:
                             loggedUser = null;
@@ -55,8 +54,6 @@ public class Main {
             System.out.println(e.getMessage());
         } catch (ExNoTrainerPlan e) {
         	System.out.println(e.getMessage());
-		}finally {
-            scanner.close();
-        }
+		}
     }
 }
