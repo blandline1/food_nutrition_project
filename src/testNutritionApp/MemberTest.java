@@ -54,7 +54,7 @@ class MemberTest {
         ((HashMap<?,?>)allPlansField.get(planner)).clear();
 
         // Create a member
-        member = new Member("TestMember", 1, "ufxx"); // "pass" hashed is "ufxx"
+        member = new Member("TestMember", 1, "ufxx");
     }
 
     @AfterEach
@@ -203,8 +203,6 @@ class MemberTest {
         assertTrue(member.checkPremium(), "Now premium");
     }
 
-    // For runOpt methods, we need minimal environment. They call Command methods.
-    // We'll just ensure no exceptions from Member side and coverage achieved.
     @Test
     void testRunOpt1() {
         // runOpt1 -> cmd.MemberrunOpt1

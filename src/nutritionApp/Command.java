@@ -47,7 +47,7 @@ public class Command {
 
     public void MemberrunOpt3(Scanner scanner) {
         Subscriber subscriber = Subscriber.getInstance();
-        subscriber.showSubscriberMenu();
+        subscriber.showSubscriberMenu(scanner);
     }
 
     

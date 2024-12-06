@@ -89,9 +89,6 @@ class AllPlansTest {
         // Call updatePlan to set some initial data
         allPlans.updatePlan(foodList, workoutList);
 
-        // This test will just check if it executes correctly.
-        // Since printPlan prints to console, we will not check its output here.
-        // You could potentially redirect the System.out stream, but it's not required for now.
         allPlans.printPlan();
     }
 

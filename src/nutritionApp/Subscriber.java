@@ -14,10 +14,9 @@ public class Subscriber {
         return instance;
     }
 
-    public void showSubscriberMenu(){
+    public void showSubscriberMenu(Scanner scanner){
         while(true) {
             Member loggedMember = (Member) Authenticator.getInstance().getLoggedUser();
-            Scanner scanner = new Scanner(System.in);
             System.out.println("\nPlease choose your wish");
             if (loggedMember.checkPremium()) {
                 System.out.println("1. Unsubscribe trainer");

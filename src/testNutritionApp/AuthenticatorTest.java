@@ -165,7 +165,7 @@ class AuthenticatorTest {
         assertFalse((Boolean) validMethod.invoke(auth, (Object) null));
         assertFalse((Boolean) validMethod.invoke(auth, ""));
         assertFalse((Boolean) validMethod.invoke(auth, "   "));
-        assertFalse((Boolean) validMethod.invoke(auth, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz")); // 52 chars
+        assertFalse((Boolean) validMethod.invoke(auth, "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"));
         assertTrue((Boolean) validMethod.invoke(auth, "validName"));
     }
 }
