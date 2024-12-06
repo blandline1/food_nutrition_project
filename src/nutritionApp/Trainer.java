@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Trainer extends User {
+	
+	private static final Command cmd = Command.getInstance();
 
     public Trainer(String name, int id, String password) {
         super(name, id, password);
@@ -29,28 +31,27 @@ public class Trainer extends User {
         System.out.println("-1. Log out");
         System.out.print("Enter your choice: ");
     }
-
+    
+    
     @Override
     public void runOpt1(Scanner scanner) {
-        Subscriber.getInstance().showMyMembers();
+       cmd.trainerrunOpt1(scanner);
     }
 
     @Override
     public void runOpt2(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        Planner planner = Planner.getInstance();
-        planner.showPlan(member, scanner);
+    	cmd.trainerrunOpt2(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-    	Planner.getInstance().showTrainerPlannerMenu(scanner);
+    	cmd.trainerrunOpt3(scanner);
     }
 
     @Override
     public void runOpt4(Scanner scanner) {
-        Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
-        member.conductAnalysis();
+        cmd.trainerrunOpt4(scanner);
     }
+
 
 }

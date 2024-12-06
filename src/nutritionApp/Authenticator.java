@@ -119,7 +119,7 @@ public class Authenticator {
         Member member = new Member(name, idCount, password);
         users.add(member);
         Planner planner = Planner.getInstance();
-        planner.memberPlanInitialize(member);
+        planner.memberCreation(member);
         idCount++;
         return "Successfully registered with name " + name + " as member";
     }

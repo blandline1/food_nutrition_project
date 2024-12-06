@@ -8,13 +8,14 @@ public class Member extends User {
 
     private ArrayList<Food> dailyFoodLogs;
     private ArrayList<ArrayList<Workout>> dailyWorkoutLogs;
-    private boolean premium;
+    private boolean premium = false;
+	private static final Command cmd = Command.getInstance();
+
 
     public Member(String name, int id, String password) {
         super(name, id, password);
         this.dailyFoodLogs = new ArrayList<>();
         this.dailyWorkoutLogs = new ArrayList<>();
-        premium = false;
     }
 
     @Override
@@ -40,6 +41,7 @@ public class Member extends User {
 	        }
 	        dailyFoodLogs.add(food);
         }finally {
+        	s.close();
         }
     }
 
@@ -94,28 +96,22 @@ public class Member extends User {
 
     @Override
     public void runOpt2(Scanner scanner) throws ExNotSubscribed, ExNoTrainerPlan {
-    	Planner.getInstance().showMemberPlannerMenu(scanner);
+        cmd.MemberrunOpt2(scanner);
     }
 
     @Override
     public void runOpt1(Scanner scanner) {
-        LoggerMenu.getInstance().showLoggerMenu(scanner);
+        cmd.MemberrunOpt1(scanner);
     }
 
     @Override
     public void runOpt3(Scanner scanner) {
-        Subscriber subscriber = Subscriber.getInstance();
-        subscriber.showSubscriberMenu(scanner);
+        cmd.MemberrunOpt3(scanner);
     }
     
     @Override
     public void runOpt4(Scanner scanner) throws ExNotSubscribed {
-        Member member = (Member) Authenticator.getInstance().getLoggedUser();
-        if (member.checkPremium()) {
-            member.conductAnalysis();
-        } else {
-            throw new ExNotSubscribed();
-        }
+        cmd.MemberrunOpt4(scanner);
     }
 
     public void setSubscribed() {

@@ -39,10 +39,9 @@ public class AllPlans implements Cloneable{
     public void approve(Trainer loggedUser, Scanner scanner) {
         associatedTrainer = loggedUser;
         System.out.println("press Y to Approved: ");
-        scanner.nextLine(); //
         String choice = scanner.nextLine();
         if (choice.equals("Y")) {
             this.planType = ApprovedPlan.getInstance();
         }
     }
-}
+} 

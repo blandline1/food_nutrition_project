@@ -15,7 +15,7 @@ public class Planner {
         return instance;
     }
 
-    public void memberPlanInitialize(Member member){
+    public void memberCreation(Member member){
         allPlans.put(member, new ArrayList<>());
     }
 
@@ -70,7 +70,6 @@ public class Planner {
         ap.updatePlan(ret_fd_obj, ret_wk_obj);
         ap.approve(tr, s);
         allPlans.computeIfAbsent(usr, k -> new ArrayList<>()).add(ap);
-        System.out.println("Successfully made plan for " + usr.getName());
 
     }
 
@@ -136,7 +135,7 @@ public class Planner {
         int plan_opt = scanner.nextInt();
         if(plan_opt == 1) {
         	Planner.getInstance().makePlan(scanner);
-        }else if(plan_opt == 2) {
+        }else if(plan_opt == 1) {
             Member member = Subscriber.getInstance().showMyMembersAndChoose(scanner);
             Planner.getInstance().makePlanForCustomer(member,scanner);
         }
