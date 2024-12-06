@@ -44,4 +44,4 @@ public class AllPlans implements Cloneable{
             this.planType = ApprovedPlan.getInstance();
         }
     }
-}
+} 

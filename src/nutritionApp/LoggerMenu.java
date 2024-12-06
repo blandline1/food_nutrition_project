@@ -56,10 +56,16 @@ public class LoggerMenu {
         System.out.println("\nLog Food!");
         System.out.print("Enter calories: ");
         int calories = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
         System.out.print("Enter carbs (in grams): ");
         int carbs = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
         System.out.print("Enter proteins (in grams): ");
         int proteins = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
         System.out.print("Enter fats (in grams): ");
         int fats = scanner.nextInt();
         scanner.nextLine(); // Consume newline
@@ -81,6 +87,7 @@ public class LoggerMenu {
     }
 	public ArrayList<Workout> getDailyWorkout(Scanner s) {
 		int num_workouts = s.nextInt();
+	    s.nextLine();
          System.out.println();
          ArrayList<Workout> wk = new ArrayList<>();
          for (int i = 0; i < num_workouts; i++) {
@@ -89,6 +96,7 @@ public class LoggerMenu {
              String name = s.nextLine();
              System.out.print("Enter number of sets: ");
              int sets = s.nextInt();
+             s.nextLine();
              System.out.println();
              System.out.print("Enter number of reps: ");
              int reps = s.nextInt();
